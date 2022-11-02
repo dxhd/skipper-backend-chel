@@ -10,11 +10,14 @@ import java.util.Date;
 public class LessonEntity {
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private Long id;
-    @Column(unique = true)
+
+    @Column(name = "mentor_id", unique = true)
     private Long mentorId;
-    @Column(unique = true)
+    @Column(name = "mentee_id", unique = true)
     private Long menteeId;
     // interval
+    @Column(name = "schedule")
     private Date schedule;
 }
