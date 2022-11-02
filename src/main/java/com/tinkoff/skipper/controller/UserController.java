@@ -1,33 +1,48 @@
 package com.tinkoff.skipper.controller;
 
-import com.tinkoff.skipper.entity.UserEntity;
+import com.tinkoff.skipper.Entity.UserEntity;
 import com.tinkoff.skipper.repository.UserRepo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping(path = "/users", produces = "application/json")
 public class UserController {
 
-    @Autowired
-    private UserRepo repo;
+    private final UserRepo userRepo;
 
-    @GetMapping
-    public List<UserEntity> getUsers() {
-        UserEntity u = new UserEntity();
-        u.setEmail("something@cool.com");
-        u.setBalance(new BigDecimal(100000.123132));
-        u.setPhoneNumber("89088234626");
-        u.setDescription("Dr. Livesey");
-        u.setBirthdate(new Date());
-        repo.save(u);
-        return List.of(new UserEntity(), new UserEntity());
+    @Autowired
+    public UserController(UserRepo userRepo) {
+        this.userRepo = userRepo;
     }
+
+    @GetMapping("{id}")
+    public UserEntity getAllUserInfo(@PathVariable("id") UserEntity userInfo) {
+        return userInfo;
+    }
+
+    @PostMapping("register")
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserEntity registerNewUser(@RequestBody UserEntity newUser) {
+        return userRepo.save(newUser);
+    }
+
+    @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserEntity updateUserInfo(
+            @PathVariable("id")UserEntity userInfoInDB,
+            @RequestBody UserEntity updatedInfo) {
+        BeanUtils.copyProperties(updatedInfo, userInfoInDB, "id");
+        return userRepo.save(userInfoInDB);
+    }
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(@PathVariable("id") UserEntity user) {
+        userRepo.delete(user);
+    }
+
 
 }

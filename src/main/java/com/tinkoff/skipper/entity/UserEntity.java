@@ -1,4 +1,4 @@
-package com.tinkoff.skipper.entity;
+package com.tinkoff.skipper.Entity;
 
 import lombok.Data;
 import org.hibernate.annotations.*;
@@ -17,6 +17,7 @@ public class UserEntity {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
+
 
    private String password;
    private Integer age;

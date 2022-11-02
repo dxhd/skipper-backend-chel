@@ -1,9 +1,7 @@
 package com.tinkoff.skipper.repository;
 
-import com.tinkoff.skipper.entity.UserEntity;
-import org.springframework.data.repository.CrudRepository;
+import com.tinkoff.skipper.Entity.UserEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.UUID;
-
-public interface UserRepo extends CrudRepository<UserEntity, Long> {
+public interface UserRepo extends JpaRepository<UserEntity, Long> {
 }

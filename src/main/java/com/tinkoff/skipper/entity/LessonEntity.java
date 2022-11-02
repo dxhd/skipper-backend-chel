@@ -1,4 +1,4 @@
-package com.tinkoff.skipper.entity;
+package com.tinkoff.skipper.Entity;
 
 import lombok.Data;
 
