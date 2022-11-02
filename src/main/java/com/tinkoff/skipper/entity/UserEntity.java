@@ -39,6 +39,7 @@ public class UserEntity {
    @Temporal(TemporalType.DATE)
    @Column(name = "birthdate")
    private Date birthdate;
+
    public enum Role {
        ADMIN,
        MODERATOR,
@@ -57,14 +58,12 @@ public class UserEntity {
    @CreationTimestamp
    @Column(name = "created_at")
    private Date createdAt;
-//   @OneToMany(mappedBy = "menteeId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//   private Set<LessonEntity> lessons;
 
-   @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
+   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
    @Column(name = "mentee_info")
    private Set<MenteeInfoEntity> menteeInfoEntity;
 
-   @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
+   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
    @Column(name = "mentor_info")
    private Set<MentorInfoEntity> mentorInfoEntity;
 }

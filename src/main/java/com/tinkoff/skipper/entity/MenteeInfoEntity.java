@@ -3,6 +3,7 @@ package com.tinkoff.skipper.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Data
@@ -24,4 +25,7 @@ public class MenteeInfoEntity {
 
     @Column(name = "number_of_cancelled_lessons")
     private Integer cancelledLessonsNumber;
+
+    @ManyToMany(mappedBy = "menteeInfoEntities", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<LessonEntity> lessons;
 }

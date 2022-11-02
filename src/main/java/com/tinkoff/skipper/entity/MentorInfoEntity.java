@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 @Data
@@ -16,8 +17,9 @@ public class MentorInfoEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
-//    @OneToMany
-//    private Set<String> subjects;
+
+    @Column(name = "subject")
+    private String subject;
 
     @Column(name = "price")
     private BigDecimal price;
@@ -45,4 +47,7 @@ public class MentorInfoEntity {
 
     @Column(name = "number_of_cancelled_lessons")
     private Integer cancelledLessonsNumber;
+
+    @ManyToMany(mappedBy = "mentorInfoEntities", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<LessonEntity> lessons;
 }
