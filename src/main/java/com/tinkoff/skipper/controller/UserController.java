@@ -1,6 +1,6 @@
 package com.tinkoff.skipper.controller;
 
-import com.tinkoff.skipper.Entity.UserEntity;
+import com.tinkoff.skipper.entity.UserEntity;
 import com.tinkoff.skipper.repository.UserRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/users", produces = "application/json")
+@RequestMapping(path = "users", produces = "application/json")
 public class UserController {
 
     private final UserRepo userRepo;

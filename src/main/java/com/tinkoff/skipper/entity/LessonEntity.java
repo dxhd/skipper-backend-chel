@@ -1,4 +1,4 @@
-package com.tinkoff.skipper.Entity;
+package com.tinkoff.skipper.entity;
 
 import lombok.Data;
 
@@ -25,4 +25,5 @@ public class LessonEntity {
     // interval
     @Column(name = "schedule")
     private Date schedule;
+
 }

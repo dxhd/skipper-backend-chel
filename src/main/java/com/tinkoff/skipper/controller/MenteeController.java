@@ -1,8 +1,8 @@
 package com.tinkoff.skipper.controller;
 
 
-import com.tinkoff.skipper.Entity.MenteeInfoEntity;
-import com.tinkoff.skipper.Entity.UserEntity;
+import com.tinkoff.skipper.entity.MenteeInfoEntity;
+import com.tinkoff.skipper.entity.UserEntity;
 import com.tinkoff.skipper.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

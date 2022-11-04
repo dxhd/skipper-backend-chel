@@ -1,6 +1,6 @@
 package com.tinkoff.skipper.repository;
 
-import com.tinkoff.skipper.Entity.UserEntity;
+import com.tinkoff.skipper.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepo extends JpaRepository<UserEntity, Long> {
