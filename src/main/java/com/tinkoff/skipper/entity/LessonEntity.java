@@ -8,22 +8,27 @@ import java.util.Set;
 
 @Entity
 @Data
+@Table (name = "lessons")
 public class LessonEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "mentor_id")
+    @JoinTable(name = "mentor_lesson",
+        joinColumns = @JoinColumn(name = "mentor_id"),
+        inverseJoinColumns = @JoinColumn(name = "lesson_id"))
     private Set<MentorInfoEntity> mentorInfoEntities;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "mentee_id")
+
+    @JoinTable(name = "mentee_lesson",
+            joinColumns = @JoinColumn(name = "mentee_id"),
+            inverseJoinColumns = @JoinColumn(name = "lesson_id"))
     private Set<MenteeInfoEntity> menteeInfoEntities;
 
     // interval
-    @Column(name = "schedule")
     private Date schedule;
 
 }
