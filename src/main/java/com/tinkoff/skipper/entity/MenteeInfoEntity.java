@@ -9,10 +9,12 @@ import java.util.Set;
 @Data
 @Table (name = "mentee_info")
 public class MenteeInfoEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+//    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
