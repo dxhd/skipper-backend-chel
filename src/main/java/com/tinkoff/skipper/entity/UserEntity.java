@@ -30,9 +30,6 @@ public class UserEntity {
    private Boolean isActive;
    private Double timeZone;
 
-   private int allLessons;
-   private int cancelledLessons;
-
    @Temporal(TemporalType.DATE)
    private Date birthdate;
 
@@ -46,7 +43,7 @@ public class UserEntity {
    private Role role = Role.USER;
 
 
-   @OneToMany(mappedBy = "menteeInfo")
+   @OneToMany(mappedBy = "menteeId")
    private Set<LessonEntity> lessons;
 
    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

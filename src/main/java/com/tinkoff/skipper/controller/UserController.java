@@ -2,42 +2,26 @@ package com.tinkoff.skipper.controller;
 
 import com.tinkoff.skipper.entity.UserEntity;
 import com.tinkoff.skipper.service.UserService;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "users", produces = "application/json")
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
-//    @GetMapping("{id}")
-//    public ResponseEntity getAllUserInfo(@PathVariable Long id) {
-//        try {
-//            return ResponseEntity.ok(userService.getOneUser(id));
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND.ordinal()).body("Такого пользователя не сущестсвует");
-//        }
-//    }
-
-    @GetMapping("{id}/mentee_info")
-    public ResponseEntity getMenteeUserInfo(@PathVariable Long id) {
+    @GetMapping("{id}")
+    public ResponseEntity getAllUserInfo(@PathVariable Long id) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(userService.getMenteeUserInfo(id));
+            return ResponseEntity.ok(userService.getOneUser(id));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND.ordinal()).body("Такого пользователя не сущестсвует");
         }
     }
-
-
 
     @PostMapping("register")
     public ResponseEntity registerNewUser(@RequestBody UserEntity newUser) {
@@ -50,7 +34,6 @@ public class UserController {
     }
 
     @PutMapping("{id}/settings")
-    //@ResponseStatus(HttpStatus.OK)
     public ResponseEntity updateUserInfo(
             @PathVariable("id")UserEntity userInfoInDB,
             @RequestBody UserEntity updatedInfo) {
@@ -63,7 +46,6 @@ public class UserController {
     }
 
     @DeleteMapping("{id}/settings")
-    //@ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity deleteUser(@PathVariable("id") UserEntity user) {
         userService.deleteUser(user);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Пользователь успешно удалён");

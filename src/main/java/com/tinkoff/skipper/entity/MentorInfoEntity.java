@@ -27,13 +27,9 @@ public class MentorInfoEntity {
     @Column(name = "number_of_students")
     private Integer studentNumber;
 
-    @Column(name = "number_of_lessons")
-    private Integer allLessons;
-    @Column(name = "number_of_cancelled_lessons")
-    private Integer cancelledLessonsNumber;
 
     //заменить каскад
-    @OneToMany(mappedBy = "mentorInfo")//, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "mentorId")//, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<LessonEntity> lessons;
 
 }

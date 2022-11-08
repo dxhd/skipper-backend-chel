@@ -1,24 +1,19 @@
 package com.tinkoff.skipper.service;
 
-import com.tinkoff.skipper.entity.MenteeInfoEntity;
 import com.tinkoff.skipper.entity.UserEntity;
-import com.tinkoff.skipper.model.Mentee;
 import com.tinkoff.skipper.model.User;
 import com.tinkoff.skipper.repository.UserRepo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepo userRepo;
-    @Autowired
-    public UserService(UserRepo userRepo) {
-        this.userRepo = userRepo;
-    }
 
     public User getOneUser(Long id) throws Exception {
         UserEntity user = userRepo.findById(id).get();
@@ -26,16 +21,6 @@ public class UserService {
             throw new Exception("Пользователь не найден");
         }
         return User.toModel(user);
-    }
-
-    public Mentee getMenteeUserInfo(Long id) throws Exception {
-        MenteeInfoEntity menteeInfo = userRepo.findMenteeInfoById(id).get();
-
-        if (menteeInfo == null) {
-            throw new Exception("Пользователь не найден");
-        }
-
-        return Mentee.toModel(menteeInfo);
     }
 
     public UserEntity registerNewUser(UserEntity newUser) throws Exception {
