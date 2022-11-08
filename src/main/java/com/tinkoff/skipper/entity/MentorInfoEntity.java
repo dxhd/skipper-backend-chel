@@ -24,15 +24,16 @@ public class MentorInfoEntity {
     private String education;
     private String workExperience;
     private Integer rating;
-    private Integer attendance;
+    @Column(name = "number_of_students")
     private Integer studentNumber;
 
     @Column(name = "number_of_lessons")
-    private Integer lessonNumber;
+    private Integer allLessons;
     @Column(name = "number_of_cancelled_lessons")
     private Integer cancelledLessonsNumber;
 
-    @ManyToMany(mappedBy = "mentorInfoEntities", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //заменить каскад
+    @OneToMany(mappedBy = "mentorInfo")//, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<LessonEntity> lessons;
 
 }

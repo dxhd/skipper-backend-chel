@@ -46,7 +46,7 @@ public class UserEntity {
    private Role role = Role.USER;
 
 
-   @OneToMany(mappedBy = "mentee")
+   @OneToMany(mappedBy = "menteeInfo")
    private Set<LessonEntity> lessons;
 
    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

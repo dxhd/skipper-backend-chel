@@ -19,14 +19,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity getAllUserInfo(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(userService.getOneUser(id));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND.ordinal()).body("Такого пользователя не сущестсвует");
-        }
-    }
+//    @GetMapping("{id}")
+//    public ResponseEntity getAllUserInfo(@PathVariable Long id) {
+//        try {
+//            return ResponseEntity.ok(userService.getOneUser(id));
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND.ordinal()).body("Такого пользователя не сущестсвует");
+//        }
+//    }
 
     @GetMapping("{id}/mentee_info")
     public ResponseEntity getMenteeUserInfo(@PathVariable Long id) {
@@ -40,7 +40,6 @@ public class UserController {
 
 
     @PostMapping("register")
-    //@ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity registerNewUser(@RequestBody UserEntity newUser) {
         try {
             userService.registerNewUser(newUser);
@@ -50,7 +49,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("{id}")
+    @PutMapping("{id}/settings")
     //@ResponseStatus(HttpStatus.OK)
     public ResponseEntity updateUserInfo(
             @PathVariable("id")UserEntity userInfoInDB,
@@ -63,7 +62,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("{id}/settings")
     //@ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity deleteUser(@PathVariable("id") UserEntity user) {
         userService.deleteUser(user);
