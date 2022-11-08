@@ -21,7 +21,6 @@ public class User {
     private BigDecimal balance;
     private Boolean isActive;
     private Double timeZone;
-    @Temporal(TemporalType.DATE)
     private Date birthdate;
     private UserEntity.Role role;
     private Set<MentorInfoEntity> mentorInfo;
@@ -38,7 +37,7 @@ public class User {
         model.setTimeZone(entity.getTimeZone());
         model.setBirthdate(entity.getBirthdate());
         model.setRole(entity.getRole());
-        model.setMentorInfo(entity.getMentorInfoEntity());
+        model.setMentorInfo(entity.getMentorInfo());
         return model;
     }
 

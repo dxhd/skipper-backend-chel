@@ -28,6 +28,17 @@ public class UserController {
         }
     }
 
+    @GetMapping("{id}/mentee_info")
+    public ResponseEntity getMenteeUserInfo(@PathVariable Long id) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(userService.getMenteeUserInfo(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND.ordinal()).body("Такого пользователя не сущестсвует");
+        }
+    }
+
+
+
     @PostMapping("register")
     //@ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity registerNewUser(@RequestBody UserEntity newUser) {

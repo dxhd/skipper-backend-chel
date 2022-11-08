@@ -30,6 +30,9 @@ public class UserEntity {
    private Boolean isActive;
    private Double timeZone;
 
+   private int allLessons;
+   private int cancelledLessons;
+
    @Temporal(TemporalType.DATE)
    private Date birthdate;
 
@@ -42,13 +45,12 @@ public class UserEntity {
    @Column(name = "user_role")
    private Role role = Role.USER;
 
-   //@JsonManagedReference
-   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)//, fetch = FetchType.LAZY)
-   private MenteeStatsEntity menteeStats;
+
+   @OneToMany(mappedBy = "mentee")
+   private Set<LessonEntity> lessons;
 
    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-   @Column(name = "mentor_info")
-   private Set<MentorInfoEntity> mentorInfoEntity;
+   private Set<MentorInfoEntity> mentorInfo;
 
    @CreationTimestamp
    private Date createdAt;

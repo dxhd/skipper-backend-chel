@@ -3,8 +3,8 @@ package com.tinkoff.skipper.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.OffsetDateTime;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 @Data
@@ -27,9 +27,18 @@ public class LessonEntity {
     private UserEntity menteeInfo;
 
     // сделать время занятия
-    //private Date schedule;
+    private OffsetDateTime schedule;
 
     @Column(name = "date_of_lesson")
     private Date lessonDate;
+
+    public enum Status {
+        CANCELLED,
+        FINISHED,
+        PLANNED,
+        IN_PROGRESS
+    }
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
 }
