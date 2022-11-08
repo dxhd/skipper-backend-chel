@@ -1,6 +1,5 @@
 package com.tinkoff.skipper.model;
 
-import com.tinkoff.skipper.entity.MenteeInfoEntity;
 import com.tinkoff.skipper.entity.MentorInfoEntity;
 import com.tinkoff.skipper.entity.UserEntity;
 import lombok.Data;
@@ -25,7 +24,6 @@ public class User {
     @Temporal(TemporalType.DATE)
     private Date birthdate;
     private UserEntity.Role role;
-    private Set<MenteeInfoEntity> menteeInfo;
     private Set<MentorInfoEntity> mentorInfo;
 
     public static User toModel(UserEntity entity) {
@@ -40,7 +38,6 @@ public class User {
         model.setTimeZone(entity.getTimeZone());
         model.setBirthdate(entity.getBirthdate());
         model.setRole(entity.getRole());
-        model.setMenteeInfo(entity.getMenteeInfoEntity());
         model.setMentorInfo(entity.getMentorInfoEntity());
         return model;
     }

@@ -15,20 +15,21 @@ public class LessonEntity {
     @Column(name = "id")
     private Long id;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "mentor_lesson",
-        joinColumns = @JoinColumn(name = "mentor_id"),
-        inverseJoinColumns = @JoinColumn(name = "lesson_id"))
-    private Set<MentorInfoEntity> mentorInfoEntities;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //связь занятий с менторами
+    @ManyToOne
+    @JoinColumn(name = "mentor_id")
+    private MentorInfoEntity mentorInfo;
 
-    @JoinTable(name = "mentee_lesson",
-            joinColumns = @JoinColumn(name = "mentee_id"),
-            inverseJoinColumns = @JoinColumn(name = "lesson_id"))
-    private Set<MenteeInfoEntity> menteeInfoEntities;
+    //связь занятий с менти (UserEntity)
+    @ManyToOne
+    @JoinColumn(name = "mentee_id")
+    private UserEntity menteeInfo;
 
-    // interval
-    private Date schedule;
+    // сделать время занятия
+    //private Date schedule;
+
+    @Column(name = "date_of_lesson")
+    private Date lessonDate;
 
 }
