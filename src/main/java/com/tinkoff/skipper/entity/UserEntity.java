@@ -1,6 +1,5 @@
 package com.tinkoff.skipper.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.*;
 
@@ -8,7 +7,6 @@ import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
@@ -45,9 +43,8 @@ public class UserEntity {
    private Role role = Role.USER;
 
    //@JsonManagedReference
-   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)//, fetch = FetchType.LAZY)
-   @Column(name = "mentee_info")
-   private Set<MenteeInfoEntity> menteeInfoEntity;
+   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)//, fetch = FetchType.LAZY)
+   private MenteeStatsEntity menteeStats;
 
    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
    @Column(name = "mentor_info")
