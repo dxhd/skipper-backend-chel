@@ -17,7 +17,7 @@ public class UserMenteeInfoController {
 
     private final UserMenteeService userMenteeService;
 
-    @GetMapping("{id}/mentee_info")
+    @GetMapping("{id}/mentee_profile")
     public ResponseEntity getMenteeUserInfo(@PathVariable Long id) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(userMenteeService.getMenteeUserInfo(id));

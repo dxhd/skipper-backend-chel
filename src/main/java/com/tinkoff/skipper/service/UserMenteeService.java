@@ -1,8 +1,10 @@
 package com.tinkoff.skipper.service;
 
 import com.tinkoff.skipper.DTO.UserMenteeStatsDTO;
-import com.tinkoff.skipper.model.UserMenteeStats;
+import com.tinkoff.skipper.entity.UserEntity;
+import com.tinkoff.skipper.model.UserMenteeProfile;
 import com.tinkoff.skipper.repository.LessonRepo;
+import com.tinkoff.skipper.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,18 +13,19 @@ import org.springframework.stereotype.Service;
 public class UserMenteeService {
 
     private final LessonRepo lessonRepo;
+    private final UserRepo userRepo;
 
-    public UserMenteeStats getMenteeUserInfo(Long id) throws Exception {
+    public UserMenteeProfile getMenteeUserInfo(Long id) throws Exception {
 
-
+        UserEntity user = userRepo.findById(id).get();
         //UserMenteeStatsDTO userStats = lessonRepo.countAllLessons(id).get();
         UserMenteeStatsDTO userStats = null;
 
-        if (userStats == null) {
+        if (user == null || userStats == null) {
             throw new Exception("Пользователь не найден");
         }
 
-        return UserMenteeStats.toModel(userStats);
+        return UserMenteeProfile.toModel(user, userStats);
     }
 
 

@@ -1,11 +1,17 @@
 package com.tinkoff.skipper.model;
 
 import com.tinkoff.skipper.DTO.UserMenteeStatsDTO;
+import com.tinkoff.skipper.entity.UserEntity;
 import lombok.Data;
 
 @Data
-public class UserMenteeStats {
+public class UserMenteeProfile {
 
+    private String username;
+    private String userPicture;
+    private String description;
+
+    //stats
     private Integer allLessons;
     private Integer attendance;
     private Integer cancelledLessons;
@@ -16,17 +22,24 @@ public class UserMenteeStats {
     private Integer attendancePast3Month;
     private Integer cancelledLessonsPast3Month;
 
-    public static UserMenteeStats toModel(UserMenteeStatsDTO info) {
+    //private double rating;
 
-        UserMenteeStats model = new UserMenteeStats();
+    //private Set<MentorInfoEntity> mentorInfo;
+
+    public static UserMenteeProfile toModel(UserEntity entity, UserMenteeStatsDTO stats) {
+        UserMenteeProfile model = new UserMenteeProfile();
+        model.setUsername(entity.getUsername());
+        model.setDescription(entity.getDescription());
+        //model.setMentorInfo(entity.getMentorInfo());
+        //model.setRating(entity.getRating());
 
         Double allLessons;
         Double cancelledLessons;
         Double attendance;
 
         //вся статистика
-        allLessons = info.getAllLessons().doubleValue();
-        cancelledLessons = info.getCancelledLessons().doubleValue();
+        allLessons = stats.getAllLessons().doubleValue();
+        cancelledLessons = stats.getCancelledLessons().doubleValue();
         attendance = (100 - (cancelledLessons * 1.0) / allLessons);
 
         model.setCancelledLessons(cancelledLessons.intValue());
@@ -34,8 +47,8 @@ public class UserMenteeStats {
         model.setAttendance(attendance.intValue());
 
         //статистика за последний месяц
-        allLessons = info.getAllLessonsPastMonth().doubleValue();
-        cancelledLessons = info.getCancelledLessonsPastMonth().doubleValue();
+        allLessons = stats.getAllLessonsPastMonth().doubleValue();
+        cancelledLessons = stats.getCancelledLessonsPastMonth().doubleValue();
         attendance = (100 - (cancelledLessons * 1.0) / allLessons);
 
         model.setCancelledLessonsPastMonth(cancelledLessons.intValue());
@@ -43,8 +56,8 @@ public class UserMenteeStats {
         model.setAttendancePastMonth(attendance.intValue());
 
         //статистика за последние 3 месяца
-        allLessons = info.getAllLessonsPast3Month().doubleValue();
-        cancelledLessons = info.getCancelledLessonsPast3Month().doubleValue();
+        allLessons = stats.getAllLessonsPast3Month().doubleValue();
+        cancelledLessons = stats.getCancelledLessonsPast3Month().doubleValue();
         attendance = (100 - (cancelledLessons * 1.0) / allLessons);
 
         model.setCancelledLessonsPast3Month(cancelledLessons.intValue());
@@ -52,6 +65,6 @@ public class UserMenteeStats {
         model.setAttendancePast3Month(attendance.intValue());
 
         return model;
-
     }
+
 }

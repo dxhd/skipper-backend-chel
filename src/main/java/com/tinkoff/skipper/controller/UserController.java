@@ -14,14 +14,14 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("{id}")
-    public ResponseEntity getAllUserInfo(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(userService.getOneUser(id));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND.ordinal()).body("Такого пользователя не сущестсвует");
-        }
-    }
+//    @GetMapping("{id}")
+//    public ResponseEntity getAllUserInfo(@PathVariable Long id) {
+//        try {
+//            return ResponseEntity.ok(userService.getOneUser(id));
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND.ordinal()).body("Такого пользователя не сущестсвует");
+//        }
+//    }
 
     @PostMapping("register")
     public ResponseEntity registerNewUser(@RequestBody UserEntity newUser) {

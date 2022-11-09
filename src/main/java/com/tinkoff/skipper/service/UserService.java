@@ -1,7 +1,7 @@
 package com.tinkoff.skipper.service;
 
 import com.tinkoff.skipper.entity.UserEntity;
-import com.tinkoff.skipper.model.User;
+import com.tinkoff.skipper.model.UserMenteeProfile;
 import com.tinkoff.skipper.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -15,13 +15,13 @@ public class UserService {
 
     private final UserRepo userRepo;
 
-    public User getOneUser(Long id) throws Exception {
-        UserEntity user = userRepo.findById(id).get();
-        if (user == null) {
-            throw new Exception("Пользователь не найден");
-        }
-        return User.toModel(user);
-    }
+//    public UserMenteeProfile getOneUser(Long id) throws Exception {
+//        UserEntity user = userRepo.findById(id).get();
+//        if (user == null) {
+//            throw new Exception("Пользователь не найден");
+//        }
+//        return UserMenteeProfile.toModel(user);
+//    }
 
     public UserEntity registerNewUser(UserEntity newUser) throws Exception {
         Optional<UserEntity> user = userRepo.findByUsername(newUser.getUsername());
