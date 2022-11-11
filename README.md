@@ -13,16 +13,26 @@ You can build and run the project using [Intellij IDEA](https://www.jetbrains.co
 If you wish to build it mannually or do not have Intellij IDEA installed you can follow the next steps:
 ### Windows
 2. To build the server and intsall its denepdencies, simply launch a maven wrapper `mvnw.cmd` with an `install` option.
-`.\mvnw.cmd install`
+```
+.\mvnw.cmd install
+```
 3. After successful build you can run your server with:
-`.\mvnw.cmd spring-boot:run`
+```
+.\mvnw.cmd spring-boot:run
+```
 ### Linux
 2. Grant executable permission to the maven wrapper
-`chmod +x mvnw`
+```
+chmod +x mvnw
+```
 3. Download dependencies and build the server
-`./mvnw install`
+```
+./mvnw install
+```
 4. Run
-`./mvnw spring-boot:run`
+```
+./mvnw spring-boot:run
+```
 ## How to check endpoints?
 To check endpoints, sipmly run the server with (use `mvnw` on Linux respectively)
 ```
