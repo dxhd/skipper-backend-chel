@@ -1,8 +1,6 @@
 # SKIPPER SERVER
----
 ## Prerequisites:
 1. [JDK 17.0.5](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) or higher
-
 ## Building the server:
 ### Common steps
 1. Clone the repo and navigate in created folder
@@ -23,9 +21,7 @@ If you wish to build it mannually or do not have Intellij IDEA installed you can
 `./mvnw install`
 4. Run
 `./mvnw spring-boot:run`
----
 ## How to check endpoints?
 To check endpoints, sipmly run the server with (use `mvnw` on Linux respectively)
 `.\mvnw.cmd spring-boot:run`
 Then, open your favourite borwser and follow the next link `localhost:8090/v3/swagger-ui.html`
-
