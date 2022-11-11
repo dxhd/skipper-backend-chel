@@ -4,8 +4,10 @@
 ## Building the server:
 ### Common steps
 1. Clone the repo and navigate in created folder
-`git clone https://github.com/dxhd/skipper-backend-chel.git`
-`cd skipper-backend-chel`
+```
+git clone https://github.com/dxhd/skipper-backend-chel.git
+cd skipper-backend-chel
+```
 You can build and run the project using [Intellij IDEA](https://www.jetbrains.com/idea/download/#section=linux) simply launching it.
 <br/>
 If you wish to build it mannually or do not have Intellij IDEA installed you can follow the next steps:
