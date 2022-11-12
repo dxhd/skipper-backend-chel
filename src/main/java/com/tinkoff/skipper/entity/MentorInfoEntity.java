@@ -3,7 +3,10 @@ package com.tinkoff.skipper.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,9 +19,11 @@ public class MentorInfoEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @NotNull
     private UserEntity user;
 
-    private String subject;
+    //добавить сущность "SubjectTag" и сделать связь @OneToMany
+    private String subjects;
     private BigDecimal price;
     private String description;
     private String education;

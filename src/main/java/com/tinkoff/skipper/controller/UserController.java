@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "users", produces = "application/json")
+@RequestMapping(path = "api/users", produces = "application/json")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -24,7 +24,7 @@ public class UserController {
 //    }
 
     @PostMapping("register")
-    public ResponseEntity registerNewUser(@RequestBody UserEntity newUser) {
+    public ResponseEntity<?> registerNewUser(@RequestBody UserEntity newUser) {
         try {
             userService.registerNewUser(newUser);
             return ResponseEntity.status(HttpStatus.CREATED).body("Пользователь зарегистрирован"); //поменять ответ на ResponseEntity.Created(...)

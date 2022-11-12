@@ -1,6 +1,7 @@
 package com.tinkoff.skipper.controller;
 
 
+import com.tinkoff.skipper.model.UserMenteeProfile;
 import com.tinkoff.skipper.service.UserMenteeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "users", produces = "application/json")
+@RequestMapping(path = "api/users", produces = "application/json")
 @RequiredArgsConstructor
 public class UserMenteeInfoController {
 
     private final UserMenteeService userMenteeService;
 
     @GetMapping("{id}/mentee_profile")
-    public ResponseEntity getMenteeUserInfo(@PathVariable Long id) {
+    public ResponseEntity<?> getMenteeUserInfo(@PathVariable Long id) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(userMenteeService.getMenteeUserInfo(id));
         } catch (Exception e) {

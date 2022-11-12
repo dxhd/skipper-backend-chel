@@ -10,6 +10,7 @@ public class UserMenteeProfile {
     private String username;
     private String userPicture;
     private String description;
+    private String tags;
 
     //stats
     private Integer allLessons;
@@ -30,6 +31,9 @@ public class UserMenteeProfile {
         UserMenteeProfile model = new UserMenteeProfile();
         model.setUsername(entity.getUsername());
         model.setDescription(entity.getDescription());
+        model.setUserPicture(entity.getUserPicture());
+        model.setTags(entity.getInterests());
+
         //model.setMentorInfo(entity.getMentorInfo());
         //model.setRating(entity.getRating());
 
