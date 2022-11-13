@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @PutMapping("{id}/settings")
-    public ResponseEntity updateUserInfo(
+    public ResponseEntity<?> updateUserInfo(
             @PathVariable("id")UserEntity userInfoInDB,
             @RequestBody UserEntity updatedInfo) {
         try {
