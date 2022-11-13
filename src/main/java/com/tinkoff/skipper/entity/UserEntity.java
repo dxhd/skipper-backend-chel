@@ -24,6 +24,7 @@ public class UserEntity {
    private String password;
    private String username;
    private String description;
+   private String userPicture;
    private String email;
    private String phoneNumber;
    private BigDecimal balance;
@@ -42,13 +43,12 @@ public class UserEntity {
    @Column(name = "user_role")
    private Role role = Role.USER;
 
-   //@JsonManagedReference
-   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)//, fetch = FetchType.LAZY)
-   private MenteeStatsEntity menteeStats;
+
+   @OneToMany(mappedBy = "menteeId")
+   private Set<LessonEntity> lessons;
 
    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-   @Column(name = "mentor_info")
-   private Set<MentorInfoEntity> mentorInfoEntity;
+   private Set<MentorInfoEntity> mentorInfo;
 
    @CreationTimestamp
    private Date createdAt;
