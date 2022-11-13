@@ -3,14 +3,11 @@ package com.tinkoff.skipper.DTO;
 import lombok.Data;
 
 @Data
-public class UserMenteeStatsDTO {
-
-
+public class StatsDTO {
     private Integer allLessons;
-    private Integer cancelledLessons;
     private Integer allLessonsPastMonth;
-    private Integer cancelledLessonsPastMonth;
     private Integer allLessonsPast3Month;
+    private Integer cancelledLessons;
+    private Integer cancelledLessonsPastMonth;
     private Integer cancelledLessonsPast3Month;
-
 }
