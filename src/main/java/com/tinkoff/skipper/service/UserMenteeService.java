@@ -1,6 +1,6 @@
 package com.tinkoff.skipper.service;
 
-import com.tinkoff.skipper.DTO.UserMenteeStatsDTO;
+import com.tinkoff.skipper.DTO.StatsDTO;
 import com.tinkoff.skipper.entity.UserEntity;
 import com.tinkoff.skipper.model.UserMenteeProfile;
 import com.tinkoff.skipper.repository.LessonRepo;
@@ -19,14 +19,11 @@ public class UserMenteeService {
 
         UserEntity user = userRepo.findById(id).get();
         //UserMenteeStatsDTO userStats = lessonRepo.countAllLessons(id).get();
-        UserMenteeStatsDTO userStats = null;
+        StatsDTO userStats = null;
 
         if (user == null || userStats == null) {
             throw new Exception("Пользователь не найден");
         }
-
         return UserMenteeProfile.toModel(user, userStats);
     }
-
-
 }

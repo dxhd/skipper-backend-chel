@@ -21,15 +21,25 @@ public class UserEntity {
    @Column(name = "id")
    private Long id;
 
+   private String fullname;
+   private String speciality;
    private String password;
    private String username;
+   private Double rating;
    private String description;
-   private String userPicture;
    private String email;
    private String phoneNumber;
    private BigDecimal balance;
    private Boolean isActive;
    private Double timeZone;
+   private String userPicture;
+
+   public enum NetStatus {
+     ONLINE,
+     OFFLINE
+   }
+   @Enumerated(EnumType.STRING)
+   private NetStatus netStatus = NetStatus.OFFLINE;
 
    @Temporal(TemporalType.DATE)
    private Date birthdate;
@@ -47,8 +57,8 @@ public class UserEntity {
    @OneToMany(mappedBy = "menteeId")
    private Set<LessonEntity> lessons;
 
-   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-   private Set<MentorInfoEntity> mentorInfo;
+   // @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   // private MentorInfoEntity mentorInfo;
 
    @CreationTimestamp
    private Date createdAt;
