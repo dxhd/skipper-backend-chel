@@ -6,6 +6,7 @@ import com.tinkoff.skipper.DTO.MentorDTO;
 import com.tinkoff.skipper.DTO.StatsDTO;
 import com.tinkoff.skipper.entity.MentorInfoEntity;
 import com.tinkoff.skipper.entity.UserEntity;
+import com.tinkoff.skipper.exception.SkipperNotFoundException;
 import com.tinkoff.skipper.model.MentorProfile;
 import com.tinkoff.skipper.repository.MentorRepo;
 
@@ -24,18 +25,12 @@ public class MentorService {
     private final MentorRepo mentorRepo;
     private final UserRepo userRepo;
 
-    public MentorProfile findMentorProfileById(Long id) throws Exception {
-        Optional<MentorInfoEntity> mentorInfo = mentorRepo.findById(id);
-        if (!mentorInfo.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No such user");
-        }
-        StatsDTO stats = new StatsDTO();
-        stats.setAllLessons(12);
-        stats.setCancelledLessons(13);
-        stats.setAllLessonsPastMonth(1);
-        return MentorProfile.toModel(mentorInfo.get(), stats);
+    public MentorProfile findById(Long id) {
+      Optional<MentorInfoEntity> mentorEntity = mentorRepo.findById(id);
+      return MentorProfile.toModel(mentorEntity.orElseThrow(
+            () -> new SkipperNotFoundException("Пользователь не найден. Проверьте данные запроса."))
+          );
     }
-
 
     //FIXME: rename to MentorDto
     public void save(MentorDTO mentor) throws Exception {

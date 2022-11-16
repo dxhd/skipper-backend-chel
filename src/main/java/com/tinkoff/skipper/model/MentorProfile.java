@@ -30,4 +30,15 @@ public class MentorProfile {
     // 
     return model; 
   }
+
+  public static MentorProfile toModel(MentorInfoEntity entity)
+  {
+    MentorProfile model = new MentorProfile();
+    model.setUsername(entity.getUsername());
+    // model.setUserPicture(entity.getUserPicture());
+    model.setDescription(entity.getDescription());
+    model.setStudentNumber(entity.getStudentNumber());
+    // TODO: calculate attendance
+    return model; 
+  }
 }

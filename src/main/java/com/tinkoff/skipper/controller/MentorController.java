@@ -1,6 +1,7 @@
 package com.tinkoff.skipper.controller;
 
 import com.tinkoff.skipper.DTO.MentorDTO;
+import com.tinkoff.skipper.DTO.SkipperResponse;
 import com.tinkoff.skipper.model.MentorProfile;
 import com.tinkoff.skipper.service.MentorService;
 
@@ -15,37 +16,32 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MentorController {
 
-  private final MentorService mentorService;
+    private final MentorService mentorService;
 
-  @GetMapping(path = "{id}")
-  public MentorProfile getMentorProfile(@PathVariable("id") Long id) {
-    try {
+    @GetMapping(path = "{id}")
+    public ResponseEntity<SkipperResponse> getMentor(@PathVariable("id") Long id) {
+      return SkipperResponse.buildResponse();
+    }
+
+    @PostMapping
+    public ResponseEntity<String> createMentor(@RequestBody MentorDTO newMentor) {
+      try {
+        mentorService.save(newMentor);
+        return new ResponseEntity<>("Hello, World!", HttpStatus.OK);
+      }
+      catch (Exception e) {
+        return new ResponseEntity<>("Hello, World!", HttpStatus.I_AM_A_TEAPOT);
+      }
+    }
+
+    @PutMapping(path = "{id}")
+    public MentorProfile updateMentorProfile() {
       return new MentorProfile();
     }
-    catch (Exception e) {
+
+    @DeleteMapping(path = "{id}")
+    public MentorProfile deleteMentor() {
       return new MentorProfile();
     }
-  }
-
-  @PostMapping
-  public ResponseEntity<String> createMentor(@RequestBody MentorDTO newMentor) {
-    try {
-      mentorService.save(newMentor);
-      return new ResponseEntity<>("Hello, World!", HttpStatus.OK);
-    }
-    catch (Exception e) {
-      return new ResponseEntity<>("Hello, World!", HttpStatus.I_AM_A_TEAPOT);
-    }
-  }
-
-  @PutMapping(path = "{id}")
-  public MentorProfile updateMentorProfile() {
-    return new MentorProfile();
-  }
-
-  @DeleteMapping(path = "{id}")
-  public MentorProfile deleteMentor() {
-    return new MentorProfile();
-  }
 
 }

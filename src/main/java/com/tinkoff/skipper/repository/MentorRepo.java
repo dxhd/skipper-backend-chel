@@ -12,6 +12,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MentorRepo extends JpaRepository<MentorInfoEntity, Long> {
-
-    Optional<MentorInfoEntity> insert(MentorDTO dto);
+//    Optional<MentorInfoEntity> insert(MentorDTO dto);
 }
