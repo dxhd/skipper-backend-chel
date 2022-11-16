@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 
 @Data
 public class MentorDTO {
-
     private String subject;
     private String username;
     private BigDecimal price;

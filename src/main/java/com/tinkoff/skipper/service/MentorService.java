@@ -36,7 +36,6 @@ public class MentorService {
     public void save(MentorDTO mentor) throws Exception {
         mentorRepo.save(createMentorInfo(mentor));
     }
-
     private MentorInfoEntity createMentorInfo(MentorDTO mentor) throws Exception{
         MentorInfoEntity mentorInfoEntity = new MentorInfoEntity();
         BeanUtils.copyProperties(mentor, mentorInfoEntity, "userId");

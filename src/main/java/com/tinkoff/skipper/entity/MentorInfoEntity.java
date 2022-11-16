@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -20,13 +19,13 @@ public class MentorInfoEntity {
     @OneToOne
     private UserEntity user;
 
-    private String subject;
+    private String subjects;
     private String username;
     private BigDecimal price;
     private String description;
     private Double rating;
     private String workExperience;
-    private String certificate;
+    private String certificates;
     private String education;
 
     @Column(name = "number_of_students")

@@ -1,6 +1,7 @@
 package com.tinkoff.skipper.controller;
 
 import com.tinkoff.skipper.DTO.MentorDTO;
+import com.tinkoff.skipper.DTO.SkipperErrorResponse;
 import com.tinkoff.skipper.DTO.SkipperResponse;
 import com.tinkoff.skipper.model.MentorProfile;
 import com.tinkoff.skipper.service.MentorService;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping(path = "mentor", produces = "application/json")
+@RequestMapping(path = "/api/mentor", produces = "application/json")
 @RequiredArgsConstructor
 public class MentorController {
 
@@ -20,7 +21,7 @@ public class MentorController {
 
     @GetMapping(path = "{id}")
     public ResponseEntity<SkipperResponse> getMentor(@PathVariable("id") Long id) {
-      return SkipperResponse.buildResponse();
+        return SkipperResponse.buildResponse(HttpStatus.OK, mentorService.findById(id));
     }
 
     @PostMapping

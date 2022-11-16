@@ -1,12 +1,11 @@
-package com.tinkoff.skipper.exception;
+package com.tinkoff.skipper.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.http.HttpStatus;
 
 @Data
 @AllArgsConstructor
-public class ErrorResponse {
+public class SkipperErrorResponse {
     private Integer status;
     private String message;
 }
