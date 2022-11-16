@@ -4,15 +4,10 @@ import com.tinkoff.skipper.DTO.MentorDTO;
 import com.tinkoff.skipper.model.MentorProfile;
 import com.tinkoff.skipper.service.MentorService;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -33,10 +28,14 @@ public class MentorController {
   }
 
   @PostMapping
-  public MentorProfile createMentor(@RequestBody MentorDTO newMentor) {
-    mentorService.save(newMentor);
-    System.out.println(newMentor);
-    return new MentorProfile();
+  public ResponseEntity<String> createMentor(@RequestBody MentorDTO newMentor) {
+    try {
+      mentorService.save(newMentor);
+      return new ResponseEntity<>("Hello, World!", HttpStatus.OK);
+    }
+    catch (Exception e) {
+      return new ResponseEntity<>("Hello, World!", HttpStatus.I_AM_A_TEAPOT);
+    }
   }
 
   @PutMapping(path = "{id}")

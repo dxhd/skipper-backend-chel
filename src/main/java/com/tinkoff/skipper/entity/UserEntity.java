@@ -57,8 +57,8 @@ public class UserEntity {
    @OneToMany(mappedBy = "menteeId")
    private Set<LessonEntity> lessons;
 
-   // @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-   // private MentorInfoEntity mentorInfo;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private MentorInfoEntity mentorInfo;
 
    @CreationTimestamp
    private Date createdAt;

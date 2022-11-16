@@ -6,12 +6,15 @@ import java.math.BigDecimal;
 
 @Data
 public class MentorDTO {
+
     private String subject;
     private String username;
     private BigDecimal price;
     private String description;
-    private Double rating;
+    private BigDecimal rating;
     private String workExperience;
     private String certificate;
     private String education;
+    private Long userId;
+
 }

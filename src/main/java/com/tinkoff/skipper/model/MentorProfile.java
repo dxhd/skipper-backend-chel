@@ -17,11 +17,12 @@ public class MentorProfile {
   private String lessonTemplates;
   private OffsetDateTime timeLine;
 
+  // FIXME: merge model and dto
   public static MentorProfile toModel(MentorInfoEntity entity, StatsDTO stats)
   {
     MentorProfile model = new MentorProfile();
     model.setUsername(entity.getUsername());
-    model.setUserPicture(entity.getUserPicture());
+    // model.setUserPicture(entity.getUserPicture());
     model.setDescription(entity.getDescription());
     model.setStudentNumber(entity.getStudentNumber());
     model.setStats(stats);

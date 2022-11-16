@@ -16,8 +16,9 @@ public class MentorInfoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /* @OneToOne */
-    /* private UserEntity user; */
+    // FIXME: add fetch lazy type
+    @OneToOne
+    private UserEntity user;
 
     private String subject;
     private String username;
@@ -34,5 +35,4 @@ public class MentorInfoEntity {
     //заменить каскад
     /* @OneToMany(mappedBy = "mentorId")//, cascade = CascadeType.ALL, fetch = FetchType.LAZY) */
     /* private Set<LessonEntity> lessons; */
-
 }
