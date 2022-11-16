@@ -1,19 +1,15 @@
 package com.tinkoff.skipper.service;
 
-import java.util.Optional;
-
+import com.tinkoff.skipper.dto.MentorDataDto;
 import com.tinkoff.skipper.dto.MentorDto;
+import com.tinkoff.skipper.dto.MentorProfileDto;
 import com.tinkoff.skipper.entity.MentorInfoEntity;
-import com.tinkoff.skipper.entity.UserEntity;
-import com.tinkoff.skipper.exception.SkipperNotFoundException;
-import com.tinkoff.skipper.model.MentorProfile;
+import com.tinkoff.skipper.exception.SkipperBadRequestException;
 import com.tinkoff.skipper.repository.MentorRepo;
 
 import com.tinkoff.skipper.repository.UserRepo;
 import org.springframework.beans.BeanUtils;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,24 +20,33 @@ public class MentorService {
     private final MentorRepo mentorRepo;
     private final UserRepo userRepo;
 
-    public MentorProfile findById(Long id) {
-      Optional<MentorInfoEntity> mentorEntity = mentorRepo.findById(id);
-      return MentorProfile.toModel(mentorEntity.orElseThrow(
-            () -> new SkipperNotFoundException("Пользователь не найден. Проверьте данные запроса.")));
+    public MentorProfileDto findById(Long id) {
+      return MentorProfileDto.toModel(mentorRepo.findById(id).orElseThrow(
+            () -> new SkipperBadRequestException("Пользователь не найден. Проверьте данные запроса.")));
     }
 
-    public void save(MentorDto mentor) throws Exception {
+    public void save(MentorDto mentor)  {
         mentorRepo.save(createMentorInfo(mentor));
     }
-    private MentorInfoEntity createMentorInfo(MentorDto mentor) throws Exception{
+
+    public void update(Long id, MentorDataDto data) {
+        MentorInfoEntity mentorEntity = mentorRepo.findById(id).orElseThrow(
+                () -> new SkipperBadRequestException("No such mentor")
+        );
+        BeanUtils.copyProperties(data, mentorEntity);
+        mentorRepo.save(mentorEntity);
+    }
+
+    public void delete(Long id) {
+        mentorRepo.deleteById(id);
+    }
+
+    private MentorInfoEntity createMentorInfo(MentorDto mentor) {
         MentorInfoEntity mentorInfoEntity = new MentorInfoEntity();
         BeanUtils.copyProperties(mentor, mentorInfoEntity, "userId");
-        Optional<UserEntity> user = userRepo.findById(mentor.getUserId());
-        if (!user.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No such user");
-        }
         // TODO: query student number
-        mentorInfoEntity.setUser(user.get());
+        mentorInfoEntity.setUser(userRepo.findById(mentor.getUserId()).orElseThrow(
+                () -> new SkipperBadRequestException("Невалидный пользователь.")));
         return mentorInfoEntity;
     }
 

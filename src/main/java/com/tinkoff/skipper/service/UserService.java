@@ -1,7 +1,6 @@
 package com.tinkoff.skipper.service;
 
 import com.tinkoff.skipper.entity.UserEntity;
-import com.tinkoff.skipper.model.UserMenteeProfile;
 import com.tinkoff.skipper.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;

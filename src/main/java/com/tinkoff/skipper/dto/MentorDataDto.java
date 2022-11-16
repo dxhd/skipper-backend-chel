@@ -5,7 +5,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class MentorDto {
+public class MentorDataDto {
     private String subjects;
     private String username;
     private BigDecimal price;
@@ -14,5 +14,4 @@ public class MentorDto {
     private String workExperience;
     private String certificates;
     private String education;
-    private Long userId;
 }

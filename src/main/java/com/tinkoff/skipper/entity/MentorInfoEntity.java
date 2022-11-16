@@ -15,15 +15,14 @@ public class MentorInfoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // FIXME: add fetch lazy type
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private UserEntity user;
 
     private String subjects;
     private String username;
     private BigDecimal price;
     private String description;
-    private Double rating;
+    private BigDecimal rating;
     private String workExperience;
     private String certificates;
     private String education;
