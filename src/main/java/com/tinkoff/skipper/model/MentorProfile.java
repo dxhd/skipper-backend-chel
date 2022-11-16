@@ -4,7 +4,7 @@ import lombok.Data;
 
 import com.tinkoff.skipper.entity.MentorInfoEntity;
 import java.time.OffsetDateTime;
-import com.tinkoff.skipper.DTO.StatsDTO;
+import com.tinkoff.skipper.dto.StatsDto;
 
 @Data
 public class MentorProfile {
@@ -12,13 +12,13 @@ public class MentorProfile {
   private String userPicture;
   private String description;
   private Integer studentNumber;
-  private StatsDTO stats;
+  private StatsDto stats;
   private String reviews;
   private String lessonTemplates;
   private OffsetDateTime timeLine;
 
   // FIXME: merge model and dto
-  public static MentorProfile toModel(MentorInfoEntity entity, StatsDTO stats)
+  public static MentorProfile toModel(MentorInfoEntity entity, StatsDto stats)
   {
     MentorProfile model = new MentorProfile();
     model.setUsername(entity.getUsername());

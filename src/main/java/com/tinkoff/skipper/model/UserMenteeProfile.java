@@ -1,6 +1,6 @@
 package com.tinkoff.skipper.model;
 
-import com.tinkoff.skipper.DTO.StatsDTO;
+import com.tinkoff.skipper.dto.StatsDto;
 import com.tinkoff.skipper.entity.UserEntity;
 import lombok.Data;
 
@@ -12,14 +12,14 @@ public class UserMenteeProfile {
     private String description;
 
     //stats
-    private StatsDTO stats;
+    private StatsDto stats;
     private Integer attendance;
     private Integer attendancePastMonth;
 
     //private double rating;
     //private Set<MentorInfoEntity> mentorInfo;
 
-    public static UserMenteeProfile toModel(UserEntity entity, StatsDTO stats) {
+    public static UserMenteeProfile toModel(UserEntity entity, StatsDto stats) {
         UserMenteeProfile model = new UserMenteeProfile();
         model.setUsername(entity.getUsername());
         model.setUserPicture(entity.getUserPicture());

@@ -1,4 +1,4 @@
-package com.tinkoff.skipper.DTO;
+package com.tinkoff.skipper.dto;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

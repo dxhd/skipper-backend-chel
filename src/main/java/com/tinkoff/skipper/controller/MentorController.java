@@ -1,8 +1,7 @@
 package com.tinkoff.skipper.controller;
 
-import com.tinkoff.skipper.DTO.MentorDTO;
-import com.tinkoff.skipper.DTO.SkipperErrorResponse;
-import com.tinkoff.skipper.DTO.SkipperResponse;
+import com.tinkoff.skipper.dto.MentorDto;
+import com.tinkoff.skipper.dto.SkipperResponse;
 import com.tinkoff.skipper.model.MentorProfile;
 import com.tinkoff.skipper.service.MentorService;
 
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping(path = "/api/mentor", produces = "application/json")
+@RequestMapping(path = "api/mentor", produces = "application/json")
 @RequiredArgsConstructor
 public class MentorController {
 
@@ -25,7 +24,7 @@ public class MentorController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createMentor(@RequestBody MentorDTO newMentor) {
+    public ResponseEntity<String> createMentor(@RequestBody MentorDto newMentor) {
       try {
         mentorService.save(newMentor);
         return new ResponseEntity<>("Hello, World!", HttpStatus.OK);

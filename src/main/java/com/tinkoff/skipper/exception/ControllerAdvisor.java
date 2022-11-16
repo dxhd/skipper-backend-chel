@@ -1,6 +1,6 @@
 package com.tinkoff.skipper.exception;
 
-import com.tinkoff.skipper.DTO.SkipperErrorResponse;
+import com.tinkoff.skipper.dto.SkipperErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -24,5 +24,11 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
     public ResponseEntity<SkipperErrorResponse> handleInternalError(Exception e) {
         return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
     }
+
+    @ExceptionHandler(SkipperBadRequestException.class)
+    public ResponseEntity<SkipperErrorResponse> handleBadRequestException(Exception e) {
+        return buildErrorResponse(HttpStatus.NO_CONTENT, e.getMessage());
+    }
+
 
 }

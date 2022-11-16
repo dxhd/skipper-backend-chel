@@ -1,9 +1,9 @@
-package com.tinkoff.skipper.DTO;
+package com.tinkoff.skipper.dto;
 
 import lombok.Data;
 
 @Data
-public class StatsDTO {
+public class StatsDto {
     private Integer allLessons;
     private Integer allLessonsPastMonth;
     private Integer allLessonsPast3Month;

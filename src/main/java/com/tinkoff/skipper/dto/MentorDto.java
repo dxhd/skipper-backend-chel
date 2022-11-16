@@ -1,11 +1,11 @@
-package com.tinkoff.skipper.DTO;
+package com.tinkoff.skipper.dto;
 
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
-public class MentorDTO {
+public class MentorDto {
     private String subject;
     private String username;
     private BigDecimal price;
@@ -15,5 +15,4 @@ public class MentorDTO {
     private String certificate;
     private String education;
     private Long userId;
-
 }

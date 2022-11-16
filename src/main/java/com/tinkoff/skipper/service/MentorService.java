@@ -2,8 +2,7 @@ package com.tinkoff.skipper.service;
 
 import java.util.Optional;
 
-import com.tinkoff.skipper.DTO.MentorDTO;
-import com.tinkoff.skipper.DTO.StatsDTO;
+import com.tinkoff.skipper.dto.MentorDto;
 import com.tinkoff.skipper.entity.MentorInfoEntity;
 import com.tinkoff.skipper.entity.UserEntity;
 import com.tinkoff.skipper.exception.SkipperNotFoundException;
@@ -28,15 +27,13 @@ public class MentorService {
     public MentorProfile findById(Long id) {
       Optional<MentorInfoEntity> mentorEntity = mentorRepo.findById(id);
       return MentorProfile.toModel(mentorEntity.orElseThrow(
-            () -> new SkipperNotFoundException("Пользователь не найден. Проверьте данные запроса."))
-          );
+            () -> new SkipperNotFoundException("Пользователь не найден. Проверьте данные запроса.")));
     }
 
-    //FIXME: rename to MentorDto
-    public void save(MentorDTO mentor) throws Exception {
+    public void save(MentorDto mentor) throws Exception {
         mentorRepo.save(createMentorInfo(mentor));
     }
-    private MentorInfoEntity createMentorInfo(MentorDTO mentor) throws Exception{
+    private MentorInfoEntity createMentorInfo(MentorDto mentor) throws Exception{
         MentorInfoEntity mentorInfoEntity = new MentorInfoEntity();
         BeanUtils.copyProperties(mentor, mentorInfoEntity, "userId");
         Optional<UserEntity> user = userRepo.findById(mentor.getUserId());

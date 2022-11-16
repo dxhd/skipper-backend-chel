@@ -1,4 +1,4 @@
-package com.tinkoff.skipper.DTO;
+package com.tinkoff.skipper.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
