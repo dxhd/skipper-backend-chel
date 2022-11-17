@@ -22,7 +22,7 @@ public class MentorInfoEntity {
     @NotNull
     private UserEntity user;
 
-    //добавить сущность "SubjectTag" и сделать связь @OneToMany
+    //TODO: добавить сущность "SubjectTag" и сделать связь @OneToMany
     private String subjects;
     private BigDecimal price;
     private String description;

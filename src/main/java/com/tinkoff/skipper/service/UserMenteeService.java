@@ -21,9 +21,8 @@ public class UserMenteeService {
 
         UserEntity user = userRepo.findById(id).get();
         log.info("Got user info from Users by id: {}", id);
-        //UserMenteeStatsDTO userStats = lessonRepo.countAllLessons(id).get();
+        UserMenteeStatsDTO userStats = lessonRepo.countAllLessons(id).get();
         log.info("Got mentee stats from Lessons by user_id: {}", id);
-        UserMenteeStatsDTO userStats = null;
 
         if (user == null || userStats == null) {
             throw new Exception("Пользователь не найден");

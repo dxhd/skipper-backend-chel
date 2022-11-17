@@ -3,17 +3,21 @@ package com.tinkoff.skipper.DTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data
-@AllArgsConstructor
-public class UserMenteeStatsDTO {
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
-    private Integer allLessons;
-    private Integer cancelledLessons;
 
-    private Integer allLessonsPastMonth;
-    private Integer cancelledLessonsPastMonth;
+public interface UserMenteeStatsDTO {
 
-    private Integer allLessonsPast3Month;
-    private Integer cancelledLessonsPast3Month;
+    Integer getAllLessons();
+    Integer getCancelledLessons();
+
+    Integer getAllLessonsPastMonth();
+     Integer getCancelledLessonsPastMonth();
+
+    Integer getAllLessonsPast3Month();
+    Integer getCancelledLessonsPast3Month();
 
 }
