@@ -1,6 +1,5 @@
 package com.tinkoff.skipper.repository;
 
-import com.tinkoff.skipper.DTO.UserMenteeStatsDTO;
 import com.tinkoff.skipper.entity.LessonEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
