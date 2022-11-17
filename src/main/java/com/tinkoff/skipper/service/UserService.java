@@ -1,6 +1,8 @@
 package com.tinkoff.skipper.service;
 
+import com.tinkoff.skipper.dto.UserMenteeProfileDto;
 import com.tinkoff.skipper.entity.UserEntity;
+import com.tinkoff.skipper.exception.SkipperBadRequestException;
 import com.tinkoff.skipper.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -14,28 +16,26 @@ public class UserService {
 
     private final UserRepo userRepo;
 
-//    public UserMenteeProfile getOneUser(Long id) throws Exception {
-//        UserEntity user = userRepo.findById(id).get();
-//        if (user == null) {
-//            throw new Exception("Пользователь не найден");
-//        }
-//        return UserMenteeProfile.toModel(user);
-//    }
+    public UserMenteeProfileDto findById(Long id) {
+        return UserMenteeProfileDto.toModel(userRepo.findById(id).orElseThrow(
+                () -> new SkipperBadRequestException("No such user")
+        ), null);
+    }
 
-    public UserEntity registerNewUser(UserEntity newUser) throws Exception {
+    public UserEntity registerNewUser(UserEntity newUser) {
         Optional<UserEntity> user = userRepo.findByUsername(newUser.getUsername());
         if (user.isPresent()) {
-            throw new Exception("Пользователь с таким именем уже существует");
+            throw new SkipperBadRequestException("Another user with this username already exist");
         }
         return userRepo.save(newUser);
     }
 
-    public UserEntity updateUserInfo(UserEntity userInfoInDB, UserEntity updatedUserInfo) throws Exception {
+    public UserEntity updateUserInfo(UserEntity userInfoInDB, UserEntity updatedUserInfo) {
 
-        Optional check = userRepo.findByUsername(updatedUserInfo.getUsername());
+        Optional<UserEntity> user = userRepo.findByUsername(updatedUserInfo.getUsername());
         //проверка на существование других пользователей с таким же юзернеймом, как нововведенный
-        if (check.isPresent() && ((UserEntity) check.get()).getId() != userInfoInDB.getId()) {
-            throw new Exception("User with this username already exists");
+        if (user.isPresent() && (user.get()).getId() != userInfoInDB.getId()) {
+            throw new SkipperBadRequestException("Another user with this username already exist");
         }
         BeanUtils.copyProperties(updatedUserInfo, userInfoInDB, "id");
         return userRepo.save(userInfoInDB);
@@ -44,6 +44,5 @@ public class UserService {
     public void deleteUser(UserEntity user) {
         userRepo.delete(user);
     }
-
 
 }
