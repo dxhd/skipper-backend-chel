@@ -22,6 +22,13 @@ public class UserService {
 //        return UserMenteeProfile.toModel(user);
 //    }
 
+
+    //TODO: обработать исключение
+    public UserEntity getUserByUsername(String username) {
+        UserEntity user = userRepo.findByUsername(username).orElseThrow();
+        return user;
+    }
+
     public UserEntity registerNewUser(UserEntity newUser) throws Exception {
         Optional<UserEntity> user = userRepo.findByUsername(newUser.getUsername());
         if (user.isPresent()) {
