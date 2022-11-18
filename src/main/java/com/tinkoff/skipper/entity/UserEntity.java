@@ -6,64 +6,57 @@ import org.hibernate.annotations.*;
 import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Data
+@Table(name = "users",
+        uniqueConstraints = @UniqueConstraint(
+                columnNames = { "username", "email", "phoneNumber" }))
 public class UserEntity {
+
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name = "id")
    private Long id;
-
-   @Column(name = "password")
+   @NotNull
    private String password;
-
-   @Column(name = "age")
-   private Integer age;
-
-   @Column(name = "description")
+   @NotNull
+   private String username;
    private String description;
-
-   @Column(name = "email")
+   private String userPicture;
+   @NotNull
    private String email;
-
-   @Column(name = "phone_number")
+   @NotNull
    private String phoneNumber;
-
-   @Column(name = "balance")
    private BigDecimal balance;
-
-   @Temporal(TemporalType.DATE)
-   @Column(name = "birthdate")
-   private Date birthdate;
-
-   public enum Role {
-       ADMIN,
-       MODERATOR,
-       USER
-   }
-   @Enumerated(EnumType.STRING)
-   @Column(name = "user_role")
-   private Role role = Role.USER;
-
-   @Column(name = "is_active")
-   private Boolean isActive;
-
-   @Column(name = "time_zone")
+   private Boolean isActive = true;
    private Double timeZone;
 
+   //добавить сущность "SubjectTag" и сделать связь @OneToMany
+   private String interests;
+
+   @Temporal(TemporalType.DATE)
+   private Date birthdate;
+
+   @ManyToMany(fetch = FetchType.EAGER)
+   @JoinTable(name = "user_roles",
+               joinColumns = @JoinColumn(name = "user_id"),
+               inverseJoinColumns = @JoinColumn(name = "role_id"))
+   private Set<RoleEntity> roles = new HashSet<>();
+
+   @OneToMany(mappedBy = "menteeId")
+   private Set<LessonEntity> lessons;
+
+   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   private MentorInfoEntity mentorInfo;
+
    @CreationTimestamp
-   @Column(name = "created_at")
-   private Date createdAt;
-
-   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-   @Column(name = "mentee_info")
-   private Set<MenteeInfoEntity> menteeInfoEntity;
-
-   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-   @Column(name = "mentor_info")
-   private Set<MentorInfoEntity> mentorInfoEntity;
+   private LocalDate createdAt;
 }

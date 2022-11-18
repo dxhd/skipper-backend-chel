@@ -3,51 +3,34 @@ package com.tinkoff.skipper.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
 @Data
-public class MentorInfoEntity {
+@Table (name = "mentor_info")
+public class MentorInfoEntity { 
     @Id
-    @GeneratedValue
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne(fetch = FetchType.LAZY)
     private UserEntity user;
 
-    @Column(name = "subject")
-    private String subject;
-
-    @Column(name = "price")
+    private String subjects;
+    private String username;
     private BigDecimal price;
-
-    @Column(name = "description")
     private String description;
-
-    @Column(name = "education")
-    private String education;
-
-    @Column(name = "work_experience")
+    private BigDecimal rating;
     private String workExperience;
-
-    @Column(name = "rating")
-    private Integer rating;
-
-    @Column(name = "attendance")
-    private Integer attendance;
+    private String certificates;
+    private String education;
 
     @Column(name = "number_of_students")
     private Integer studentNumber;
 
-    @Column(name = "number_of_lessons")
-    private Integer lessonNumber;
-
-    @Column(name = "number_of_cancelled_lessons")
-    private Integer cancelledLessonsNumber;
-
-    @ManyToMany(mappedBy = "mentorInfoEntities", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<LessonEntity> lessons;
+    //заменить каскад
+    /* @OneToMany(mappedBy = "mentorId")//, cascade = CascadeType.ALL, fetch = FetchType.LAZY) */
+    /* private Set<LessonEntity> lessons; */
 }

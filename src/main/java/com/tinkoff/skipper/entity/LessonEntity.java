@@ -3,26 +3,42 @@ package com.tinkoff.skipper.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Set;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 
 @Entity
 @Data
+@Table (name = "lessons")
 public class LessonEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+    //связь занятий с менторами
+    @ManyToOne
     @JoinColumn(name = "mentor_id")
-    private Set<MentorInfoEntity> mentorInfoEntities;
+    private MentorInfoEntity mentorId;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //связь занятий с менти (UserEntity)
+    @ManyToOne
     @JoinColumn(name = "mentee_id")
-    private Set<MenteeInfoEntity> menteeInfoEntities;
+    private UserEntity menteeId;
 
-    // interval
-    @Column(name = "schedule")
-    private Date schedule;
+
+    private OffsetDateTime schedule;
+
+    @Column(name = "date_of_lesson")
+    private LocalDate lessonDate;
+
+    public enum Status {
+        CANCELLED,
+        FINISHED,
+        PLANNED,
+        IN_PROGRESS
+    }
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
 }
