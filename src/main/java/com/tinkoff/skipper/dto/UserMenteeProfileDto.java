@@ -14,6 +14,8 @@ public class UserMenteeProfileDto {
     private String interests;
     private Double timezone;
     private LocalDate registrationDate;
+    private String speciality;
+    //TODO: добавить статус "в сети"/"не в сети"
 
     //stats
     private StatsDto stats;
@@ -27,10 +29,17 @@ public class UserMenteeProfileDto {
 
     public static UserMenteeProfileDto toModel(UserEntity entity, StatsDto stats) {
         UserMenteeProfileDto model = new UserMenteeProfileDto();
+
         model.setUsername(entity.getUsername());
         model.setUserPicture(entity.getUserPicture());
         model.setDescription(entity.getDescription());
+        model.setInterests(entity.getInterests());
+        model.setTimezone(entity.getTimeZone());
+        model.setRegistrationDate(entity.getCreatedAt());
+        model.setSpeciality(entity.getSpeciality());
+
         model.setStats(stats);
+
 
 
         // TODO: вынести вычисление в отдельный метод либо перенести в StatsDto

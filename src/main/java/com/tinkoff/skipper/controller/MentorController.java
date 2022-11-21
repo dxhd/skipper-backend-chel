@@ -26,20 +26,20 @@ public class MentorController {
     @PostMapping
     public ResponseEntity<SkipperResponse> createMentor(@RequestBody MentorDto newMentor) {
         mentorService.save(newMentor);
-        return SkipperResponse.buildResponse(HttpStatus.CREATED, "User has been created");
+        return SkipperResponse.buildResponse(HttpStatus.CREATED, "Mentor Info has been created");
     }
 
     @PutMapping(path = "{id}")
     public ResponseEntity<SkipperResponse> updateMentorProfile(@RequestBody MentorDataDto data,
                                                                @PathVariable("id") Long id) {
         mentorService.update(id, data);
-        return SkipperResponse.buildResponse(HttpStatus.OK, "User has been updated");
+        return SkipperResponse.buildResponse(HttpStatus.OK, "Mentor Info has been updated");
     }
 
     @DeleteMapping(path = "{id}")
     public ResponseEntity<SkipperResponse> deleteMentor(@PathVariable("id") Long id) {
         mentorService.delete(id);
-        return SkipperResponse.buildResponse(HttpStatus.OK, "Mentor has been deleted successfully");
+        return SkipperResponse.buildResponse(HttpStatus.NO_CONTENT, "Mentor Info has been deleted successfully");
     }
 
 }

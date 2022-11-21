@@ -26,21 +26,21 @@ public class UserEntity {
    @Column(name = "id")
    private Long id;
    @NotNull
-   private String password;
+   private String phoneNumber;
    @NotNull
+   private String password;
    private String username;
    private String description;
    private String userPicture;
-   @NotNull
    private String email;
-   @NotNull
-   private String phoneNumber;
    private BigDecimal balance;
    private Boolean isActive = true;
    private Double timeZone;
+   private String speciality; //нужна ли специальность, ведь есть интересы?
 
    //добавить сущность "SubjectTag" и сделать связь @OneToMany
    private String interests;
+
 
    @Temporal(TemporalType.DATE)
    private Date birthdate;
@@ -59,4 +59,5 @@ public class UserEntity {
 
    @CreationTimestamp
    private LocalDate createdAt;
+
 }
