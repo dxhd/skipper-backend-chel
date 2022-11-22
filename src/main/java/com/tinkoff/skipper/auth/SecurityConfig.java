@@ -26,7 +26,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests(
-                        authz -> authz
+                        authz -> authz //TODO: изменить url-адреса
                                 .antMatchers("api/auth/login", "api/auth/token").permitAll()
                                 .anyRequest().authenticated()
                                 .and()

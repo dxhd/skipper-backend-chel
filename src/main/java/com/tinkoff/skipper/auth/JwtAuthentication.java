@@ -13,7 +13,6 @@ public class JwtAuthentication implements Authentication {
 
     private boolean authenticated;
     private String username;
-    private String phoneNumber;
     private Set<RoleEntity> roles;
 
 
@@ -29,7 +28,7 @@ public class JwtAuthentication implements Authentication {
 
     @Override
     public Object getDetails() {
-        return phoneNumber;
+        return username;
     }
 
     @Override

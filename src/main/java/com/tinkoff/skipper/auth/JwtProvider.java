@@ -42,7 +42,8 @@ public class JwtProvider {
                 .setExpiration(accessExpiration)
                 .signWith(jwtAccessSecret)
                 .claim("roles", user.getRoles())
-                .claim("phoneNumber", user.getPhoneNumber())
+                .claim("username", user.getUsername())
+                .claim("userPicture", user.getUserPicture())
                 .compact();
 
     }
@@ -81,7 +82,7 @@ public class JwtProvider {
         } catch (MalformedJwtException mjEx) {
             log.error("Malformed jwt", mjEx);
         } catch (RuntimeException e) {
-            log.error("invalid token", e);
+            log.error("Invalid token", e);
         }
         return false;
     }

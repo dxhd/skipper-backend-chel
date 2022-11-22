@@ -18,7 +18,7 @@ import java.util.Map;
 public class AuthService {
 
     private final UserService userService;
-    private final Map<String, String> refreshStorage = new HashMap<>();
+    private final Map<String, String> refreshStorage = new HashMap<>(); //лучше использовать redis
     private final JwtProvider jwtProvider;
 
     public JwtResponse login(@NonNull JwtRequest authRequest) throws AuthException {
