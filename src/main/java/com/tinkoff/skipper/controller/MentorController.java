@@ -2,9 +2,10 @@ package com.tinkoff.skipper.controller;
 
 import com.tinkoff.skipper.dto.MentorDto;
 import com.tinkoff.skipper.dto.MentorDataDto;
-import com.tinkoff.skipper.dto.SkipperResponse;
+import com.tinkoff.skipper.dto.SkipperResponseBody;
 import com.tinkoff.skipper.service.MentorService;
 
+import com.tinkoff.skipper.utils.SkipperResponseBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,27 +20,32 @@ public class MentorController {
     private final MentorService mentorService;
 
     @GetMapping(path = "{id}")
-    public ResponseEntity<SkipperResponse> getMentor(@PathVariable("id") Long id) {
-        return SkipperResponse.buildResponse(HttpStatus.OK, mentorService.findById(id));
+    public ResponseEntity<SkipperResponseBody<?>> getMentor(
+            @PathVariable("id") Long id) {
+        return SkipperResponseBuilder.buildResponse(HttpStatus.OK, mentorService.findById(id));
     }
 
+    //TODO: убрать message "User has been created" в отдельную мапу
     @PostMapping
-    public ResponseEntity<SkipperResponse> createMentor(@RequestBody MentorDto newMentor) {
+    public ResponseEntity<SkipperResponseBody<?>> createMentor(
+            @RequestBody MentorDto newMentor) {
         mentorService.save(newMentor);
-        return SkipperResponse.buildResponse(HttpStatus.CREATED, "User has been created");
+        return SkipperResponseBuilder.buildResponse(HttpStatus.CREATED, "Mentor Info has been created");
     }
 
     @PutMapping(path = "{id}")
-    public ResponseEntity<SkipperResponse> updateMentorProfile(@RequestBody MentorDataDto data,
-                                                               @PathVariable("id") Long id) {
+    public ResponseEntity<SkipperResponseBody<?>> updateMentorProfile(
+            @RequestBody MentorDataDto data,
+            @PathVariable("id") Long id) {
         mentorService.update(id, data);
-        return SkipperResponse.buildResponse(HttpStatus.OK, "User has been updated");
+        return SkipperResponseBuilder.buildResponse(HttpStatus.OK, "Mentor Info has been updated");
     }
 
     @DeleteMapping(path = "{id}")
-    public ResponseEntity<SkipperResponse> deleteMentor(@PathVariable("id") Long id) {
+    public ResponseEntity<SkipperResponseBody<?>> deleteMentor(
+            @PathVariable("id") Long id) {
         mentorService.delete(id);
-        return SkipperResponse.buildResponse(HttpStatus.OK, "Mentor has been deleted successfully");
+        return SkipperResponseBuilder.buildResponse(HttpStatus.NO_CONTENT, "Mentor Info has been deleted successfully");
     }
 
 }
