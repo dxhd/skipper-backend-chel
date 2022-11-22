@@ -1,7 +1,6 @@
-package com.tinkoff.skipper.model;
+package com.tinkoff.skipper.toDELETE;
 
 
-import com.tinkoff.skipper.entity.UserEntity;
 import lombok.Data;
 
 @Data

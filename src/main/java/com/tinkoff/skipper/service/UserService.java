@@ -1,18 +1,12 @@
 package com.tinkoff.skipper.service;
 
-import com.tinkoff.skipper.dto.MentorProfileDto;
-import com.tinkoff.skipper.dto.UserMenteeProfileDto;
-import com.tinkoff.skipper.entity.MentorInfoEntity;
 import com.tinkoff.skipper.entity.UserEntity;
 import com.tinkoff.skipper.exception.SkipperBadRequestException;
 import com.tinkoff.skipper.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
