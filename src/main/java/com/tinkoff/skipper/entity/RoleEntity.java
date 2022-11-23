@@ -12,9 +12,10 @@ import javax.persistence.*;
 @NoArgsConstructor(access= AccessLevel.PROTECTED, force=true)
 public class RoleEntity implements GrantedAuthority {
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @Enumerated(EnumType.STRING)
     private Role role;
 

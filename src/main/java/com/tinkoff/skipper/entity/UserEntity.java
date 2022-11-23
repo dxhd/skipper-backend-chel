@@ -48,7 +48,8 @@ public class UserEntity {
    @ManyToMany(fetch = FetchType.EAGER)
    @JoinTable(name = "user_roles",
            joinColumns = @JoinColumn (name = "user_id"),
-           inverseJoinColumns = @JoinColumn (name = "role_id"))
+           inverseJoinColumns = @JoinColumn (name = "role"),
+           uniqueConstraints = @UniqueConstraint( columnNames = { "user_id", "role" }))
    private Set<RoleEntity> roles = new HashSet<>();
 
    @OneToMany(mappedBy = "menteeId")
@@ -59,5 +60,13 @@ public class UserEntity {
 
    @CreationTimestamp
    private LocalDate createdAt;
+
+   public void addRole(RoleEntity role) {
+      roles.add(role);
+   }
+
+   public void removeRole(RoleEntity role) {
+      roles.remove(role);
+   }
 
 }
