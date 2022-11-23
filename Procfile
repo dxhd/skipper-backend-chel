@@ -1,1 +1,0 @@
-build: ./mvnw spring-boot:run -P prod
