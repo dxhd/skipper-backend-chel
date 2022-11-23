@@ -13,7 +13,7 @@ INSERT into mentor_info (education, subjects, user_id)
 VALUES ('susu4', 'cooking', 3);
 
 INSERT INto lessons (status, mentee_id, mentor_id, date_of_lesson)
-values ('FINISHED', 1, 1, '12-10-2022');
+values ('FINISHED', 1, 1, '2022-09-12');
 INSERT INto lessons (status, mentee_id, mentor_id, date_of_lesson)
 values ('CANCELLED', 1, 1, '12-09-2022');
 INSERT INto lessons (status, mentee_id, mentor_id, date_of_lesson)
@@ -21,14 +21,17 @@ values ('FINISHED', 1, 1, '12-09-2022');
 INSERT INto lessons (status, mentee_id, mentor_id, date_of_lesson)
 values ('FINISHED', 1, 1, '12-01-2022');
 INSERT INto lessons (status, mentee_id, mentor_id, date_of_lesson)
-values ('PLANNED', 1, 1, '13-10-2022');
+values ('PLANNED', 1, 1, '10-09-2022');
+INSERT INto lessons (status, mentee_id, mentor_id, date_of_lesson)
+values ('PLANNED', 1, 1, '12-09-2022');
+INSERT INto lessons (status, mentee_id, mentor_id, date_of_lesson)
+values ('PLANNED', 1, 1, '2-09-2022');
 INSERT INto lessons (status, mentee_id, mentor_id, date_of_lesson)
 values ('IN_PROGRESS', 1, 1, '12-11-2022');
-
 INSERT INto lessons (status, mentee_id, mentor_id, date_of_lesson)
 values ('CANCELLED', 1, 2, '12-08-2022');
 INSERT INto lessons (status, mentee_id, mentor_id, date_of_lesson)
-values ('FINISHED', 1, 2, '15-09-2022');
+values ('FINISHED', 1, 2, '09-15-2022');
 INSERT INto lessons (status, mentee_id, mentor_id, date_of_lesson)
 values ('PLANNED', 1, 2, '11-11-2022');
 INSERT INto lessons (status, mentee_id, mentor_id, date_of_lesson)
