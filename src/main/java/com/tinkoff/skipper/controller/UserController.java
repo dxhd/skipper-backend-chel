@@ -1,12 +1,13 @@
 package com.tinkoff.skipper.controller;
 
-import com.tinkoff.skipper.dto.SkipperResponseBody;
+import com.tinkoff.skipper.dto.RegisterRequest;
 import com.tinkoff.skipper.entity.UserEntity;
 import com.tinkoff.skipper.service.UserService;
 import com.tinkoff.skipper.utils.SkipperResponseBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,31 +17,45 @@ public class UserController {
 
     private final UserService userService;
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("{id}")
-    public ResponseEntity<SkipperResponseBody<?>> getAllUserInfo(@PathVariable Long id) {
-        return SkipperResponseBuilder.buildResponse(HttpStatus.OK, userService.findById(id));
+    public ResponseEntity<UserEntity> getAllUserInfo(@PathVariable Long id) {
+        return SkipperResponseBuilder.buildResponse(
+                HttpStatus.OK,
+                userService.getById(id)
+        );
     }
 
-    //TODO: Передавать параметром дто-шку
     @PostMapping("register")
-    public ResponseEntity<SkipperResponseBody<?>> registerNewUser(@RequestBody UserEntity newUser) {
+    public ResponseEntity<String> registerNewUser(@RequestBody RegisterRequest newUser) {
             userService.registerNewUser(newUser);
-            return SkipperResponseBuilder.buildResponse(HttpStatus.CREATED, "User has been created");
+            return SkipperResponseBuilder.buildResponse(
+                    HttpStatus.CREATED,
+                    "Пользователь зарегистрирован."
+            );
     }
 
     //TODO: Передавать параметром дто-шку
+    @PreAuthorize("hasAuthority('USER')")
     @PutMapping("{id}/settings")
-    public ResponseEntity<SkipperResponseBody<?>> updateUserInfo(
+    public ResponseEntity<String> updateUserInfo(
             @PathVariable("id")Long id,
             @RequestBody UserEntity updatedInfo) {
         userService.updateUserInfo(id, updatedInfo);
-        return SkipperResponseBuilder.buildResponse(HttpStatus.OK, "User Info has been updated");
+        return SkipperResponseBuilder.buildResponse(
+                HttpStatus.OK,
+                "Информация пользователя обновлена."
+        );
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @DeleteMapping("{id}/settings")
-    public ResponseEntity<SkipperResponseBody<?>> deleteUser(@PathVariable("id") UserEntity user) {
+    public ResponseEntity<String> deleteUser(@PathVariable("id") UserEntity user) {
         userService.deleteUser(user);
-        return SkipperResponseBuilder.buildResponse(HttpStatus.NO_CONTENT, "User has been deleted successfully");
+        return SkipperResponseBuilder.buildResponse(
+                HttpStatus.NO_CONTENT,
+                "Пользователь успешно удален."
+        );
     }
 
 

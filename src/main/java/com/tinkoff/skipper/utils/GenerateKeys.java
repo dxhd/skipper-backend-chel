@@ -1,4 +1,4 @@
-package com.tinkoff.skipper.auth;
+package com.tinkoff.skipper.utils;
 
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Encoders;

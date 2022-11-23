@@ -1,5 +1,6 @@
-package com.tinkoff.skipper.auth;
+package com.tinkoff.skipper.config;
 
+import com.tinkoff.skipper.filter.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,12 +27,11 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests(
-                        authz -> authz //TODO: изменить url-адреса
-                                .antMatchers("api/auth/login", "api/auth/token").permitAll()
-                                .anyRequest().authenticated()
+                        authz -> authz
+                                .antMatchers("api/auth/refresh").authenticated()
+                                .anyRequest().permitAll()
                                 .and()
                                 .addFilterAfter(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 ).build();
     }
-
 }

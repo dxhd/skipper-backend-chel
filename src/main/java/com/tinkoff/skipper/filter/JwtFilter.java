@@ -1,5 +1,8 @@
-package com.tinkoff.skipper.auth;
+package com.tinkoff.skipper.filter;
 
+import com.tinkoff.skipper.auth.JwtAuthentication;
+import com.tinkoff.skipper.service.JwtProvider;
+import com.tinkoff.skipper.utils.JwtUtils;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +15,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 

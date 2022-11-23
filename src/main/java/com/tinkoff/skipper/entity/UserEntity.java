@@ -41,14 +41,14 @@ public class UserEntity {
    //добавить сущность "SubjectTag" и сделать связь @OneToMany
    private String interests;
 
-
    @Temporal(TemporalType.DATE)
    private Date birthdate;
 
+   @Enumerated(EnumType.STRING)
    @ManyToMany(fetch = FetchType.EAGER)
    @JoinTable(name = "user_roles",
-               joinColumns = @JoinColumn(name = "user_id"),
-               inverseJoinColumns = @JoinColumn(name = "role_id"))
+           joinColumns = @JoinColumn (name = "user_id"),
+           inverseJoinColumns = @JoinColumn (name = "role_id"))
    private Set<RoleEntity> roles = new HashSet<>();
 
    @OneToMany(mappedBy = "menteeId")

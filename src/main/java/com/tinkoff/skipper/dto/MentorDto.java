@@ -1,18 +1,19 @@
 package com.tinkoff.skipper.dto;
 
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 
-@Data
-public class MentorDto {
-    private String subjects;
-    private String username;
-    private BigDecimal price;
-    private String description;
-    private BigDecimal rating;
-    private String workExperience;
-    private String certificates;
-    private String education;
-    private Long userId;
+@Getter
+@Builder
+public class MentorDto { //TODO: добавить всем дто-шкам final и заменить @Data на @Getter и @Builder
+    private final String subjects;
+    private final String username;
+    private final BigDecimal price;
+    private final String description;
+    private final BigDecimal rating;
+    private final String workExperience;
+    private final String certificates;
+    private final String education;
+    private final Long userId;
 }

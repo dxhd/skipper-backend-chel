@@ -1,7 +1,7 @@
 package com.tinkoff.skipper.controller;
 
 
-import com.tinkoff.skipper.dto.SkipperResponseBody;
+import com.tinkoff.skipper.dto.UserMenteeProfileDto;
 import com.tinkoff.skipper.service.UserMenteeService;
 import com.tinkoff.skipper.utils.SkipperResponseBuilder;
 import lombok.RequiredArgsConstructor;
@@ -22,9 +22,11 @@ public class UserMenteeInfoController {
     private final UserMenteeService userMenteeService;
 
     @GetMapping("{id}/mentee_profile")
-    public ResponseEntity<SkipperResponseBody<?>> getMenteeUserInfo(@PathVariable Long id) {
+    public ResponseEntity<UserMenteeProfileDto> getMenteeUserInfo(@PathVariable Long id) {
         return SkipperResponseBuilder.buildResponse(
-                HttpStatus.OK, userMenteeService.getMenteeUserInfoById(id));
+                HttpStatus.OK,
+                userMenteeService.getMenteeUserInfoById(id)
+        );
     }
 
 }

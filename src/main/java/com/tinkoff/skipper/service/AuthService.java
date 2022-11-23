@@ -1,8 +1,9 @@
-package com.tinkoff.skipper.auth;
+package com.tinkoff.skipper.service;
 
-
+import com.tinkoff.skipper.auth.JwtAuthentication;
+import com.tinkoff.skipper.dto.JwtRequest;
+import com.tinkoff.skipper.dto.JwtResponse;
 import com.tinkoff.skipper.entity.UserEntity;
-import com.tinkoff.skipper.service.UserService;
 import io.jsonwebtoken.Claims;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class AuthService {
 
     public JwtResponse login(@NonNull JwtRequest authRequest) throws AuthException {
 
-        final UserEntity user = userService.getUserByUsername(authRequest.getUsername());
+        final UserEntity user = userService.getByUsername(authRequest.getUsername());
         if (user.getPassword().equals(authRequest.getPassword())) {
             final String accessToken = jwtProvider.generateAccessToken(user);
             final String refreshToken = jwtProvider.generateRefreshToken(user);
@@ -33,7 +34,6 @@ public class AuthService {
         else {
             throw new AuthException("Неправильный пароль");
         }
-
     }
 
     public JwtResponse getAccessToken(@NonNull String refreshToken) {
@@ -43,7 +43,7 @@ public class AuthService {
             final String saveRefreshToken = refreshStorage.get(username);
 
             if (saveRefreshToken != null && saveRefreshToken.equals(refreshToken)) {
-                final UserEntity user = userService.getUserByUsername(username);
+                final UserEntity user = userService.getByUsername(username);
                 final String accessToken = jwtProvider.generateAccessToken(user);
                 return new JwtResponse(accessToken, null);
             }
@@ -58,7 +58,7 @@ public class AuthService {
             final String saveRefreshToken = refreshStorage.get(username);
 
             if (saveRefreshToken != null && saveRefreshToken.equals(refreshToken)) {
-                final UserEntity user = userService.getUserByUsername(username);
+                final UserEntity user = userService.getByUsername(username);
                 final String accessToken = jwtProvider.generateAccessToken(user);
                 final String newRefreshToken = jwtProvider.generateRefreshToken(user);
                 refreshStorage.put(user.getUsername(), newRefreshToken);
@@ -71,5 +71,4 @@ public class AuthService {
     public JwtAuthentication getAuthInfo() {
         return (JwtAuthentication) SecurityContextHolder.getContext().getAuthentication();
     }
-
 }

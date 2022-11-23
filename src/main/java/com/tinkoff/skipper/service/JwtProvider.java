@@ -1,4 +1,4 @@
-package com.tinkoff.skipper.auth;
+package com.tinkoff.skipper.service;
 
 
 import com.tinkoff.skipper.entity.UserEntity;
