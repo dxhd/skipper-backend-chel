@@ -30,7 +30,4 @@ public class MentorInfoEntity {
     @Column(name = "number_of_students")
     private Integer studentNumber;
 
-    //заменить каскад
-    /* @OneToMany(mappedBy = "mentorId")//, cascade = CascadeType.ALL, fetch = FetchType.LAZY) */
-    /* private Set<LessonEntity> lessons; */
 }

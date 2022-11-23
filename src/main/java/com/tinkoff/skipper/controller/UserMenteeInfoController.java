@@ -1,8 +1,9 @@
 package com.tinkoff.skipper.controller;
 
 
-import com.tinkoff.skipper.model.UserMenteeProfile;
+import com.tinkoff.skipper.dto.UserMenteeProfileDto;
 import com.tinkoff.skipper.service.UserMenteeService;
+import com.tinkoff.skipper.utils.SkipperResponseBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -21,12 +22,11 @@ public class UserMenteeInfoController {
     private final UserMenteeService userMenteeService;
 
     @GetMapping("{id}/mentee_profile")
-    public ResponseEntity<?> getMenteeUserInfo(@PathVariable Long id) {
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(userMenteeService.getMenteeUserInfo(id));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND.ordinal()).body("Такого пользователя не сущестсвует");
-        }
+    public ResponseEntity<UserMenteeProfileDto> getMenteeUserInfo(@PathVariable Long id) {
+        return SkipperResponseBuilder.buildResponse(
+                HttpStatus.OK,
+                userMenteeService.getMenteeUserInfoById(id)
+        );
     }
 
 }

@@ -7,9 +7,6 @@ import java.util.Optional;
 
 public interface UserRepo extends JpaRepository<UserEntity, Long> {
     Optional<UserEntity> findByUsername(String username);
-
-    //заменить данный метод sql-запросом
-//    Optional<UserMenteeStatsDTO> findMenteeInfoById(Long id);
-
+    Optional<UserEntity> findByPhoneNumber(String phoneNumber);
 
 }

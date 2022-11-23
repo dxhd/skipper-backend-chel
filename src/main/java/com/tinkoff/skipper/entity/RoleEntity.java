@@ -1,23 +1,32 @@
 package com.tinkoff.skipper.entity;
 
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 
+@Data
 @Entity
-public class RoleEntity {
+@Table(name = "Roles")
+@AllArgsConstructor
+@NoArgsConstructor(access= AccessLevel.PROTECTED, force=true)
+public class RoleEntity implements GrantedAuthority {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    Long id;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Enumerated(EnumType.STRING)
-    @Column(name = "user_role")
-    private Role name = Role.ROLE_USER;
+    private Role role;
 
-    public enum Role {
-        ROLE_ADMIN,
-        ROLE_MODERATOR,
-        ROLE_USER
+    @Override
+    public String getAuthority() {
+        return role.value;
     }
 
+    @RequiredArgsConstructor
+    public enum Role {
+        ADMIN("ADMIN"), MODERATOR("MODERATOR"), USER("USER");
+        private final String value;
+    }
 
 }

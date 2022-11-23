@@ -1,10 +1,10 @@
-insert into users (description, email, username, password)
+insert into users (description, email, phone_number, password)
 values ('some desc1', 'test1@mail.ru', 'dxhd', 'passss');
-insert into users (description, email, username, password)
+insert into users (description, email, phone_number, password)
 values ('some desc1', 'test2@mail.ru', 'jjk', 'pass21s');
-insert into users (description, email, username, password)
+insert into users (description, email, phone_number, password)
 values ('some desc1', 'test3@mail.ru', 'chopper', 'pa23ssss');
-insert into users (description, email, username, password)
+insert into users (description, email, phone_number, password)
 values ('some desc1', 'test4@mail.ru', 'cactus', 'passs432s');
 
 INSERT into mentor_info (education, subjects, user_id)
