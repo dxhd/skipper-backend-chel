@@ -5,9 +5,9 @@ import com.tinkoff.skipper.entity.RoleEntity;
 import com.tinkoff.skipper.entity.UserEntity;
 import com.tinkoff.skipper.exception.SkipperBadRequestException;
 import com.tinkoff.skipper.exception.SkipperNotFoundException;
+import com.tinkoff.skipper.repository.RoleRepo;
 import com.tinkoff.skipper.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepo userRepo;
+    private final RoleRepo roleRepo;
 
     public UserEntity getById(Long id) {
         return userRepo.findById(id).orElseThrow(
@@ -36,6 +37,10 @@ public class UserService {
         user.setUsername(newUser.getPhoneNumber());
         user.setPhoneNumber(newUser.getPhoneNumber());
         user.setPassword(newUser.getPassword());
+        RoleEntity roleEntity = roleRepo.findById(RoleEntity.Role.USER).orElseThrow(
+                () -> new SkipperNotFoundException("Такой роли не существует.")
+        );
+        user.addRole(roleEntity);
         return userRepo.save(user);
     }
 

@@ -26,6 +26,7 @@ public class MentorInfoEntity {
     private String workExperience;
     private String certificates;
     private String education;
+    private String speciality;
 
     @Column(name = "number_of_students")
     private Integer studentNumber;
