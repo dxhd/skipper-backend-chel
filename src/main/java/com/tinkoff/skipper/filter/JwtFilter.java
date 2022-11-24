@@ -24,9 +24,7 @@ import java.io.IOException;
 public class JwtFilter extends GenericFilterBean {
 
     private static final String AUTHORIZATION = "Authorization";
-
     private final JwtProvider jwtProvider;
-
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain fc)
@@ -49,5 +47,4 @@ public class JwtFilter extends GenericFilterBean {
         }
         return null;
     }
-
 }

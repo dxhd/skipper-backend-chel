@@ -10,24 +10,23 @@ import javax.persistence.*;
 @Table(name = "Roles")
 @AllArgsConstructor
 @NoArgsConstructor(access= AccessLevel.PROTECTED, force=true)
-public class RoleEntity implements GrantedAuthority {
+public class RoleEntity {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
     @Id
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Override
-    public String getAuthority() {
-        return role.value;
-    }
+
 
     @RequiredArgsConstructor
-    public enum Role {
+    public enum Role implements GrantedAuthority {
         ADMIN("ADMIN"), MODERATOR("MODERATOR"), USER("USER");
         private final String value;
-    }
 
+        @Override
+        public String getAuthority() {
+            return value;
+        }
+
+    }
 }

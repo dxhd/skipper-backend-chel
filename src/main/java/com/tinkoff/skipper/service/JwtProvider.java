@@ -1,6 +1,6 @@
 package com.tinkoff.skipper.service;
 
-
+import com.tinkoff.skipper.entity.RoleEntity;
 import com.tinkoff.skipper.entity.UserEntity;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -9,6 +9,7 @@ import lombok.NonNull;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -17,6 +18,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -37,11 +39,17 @@ public class JwtProvider {
         final LocalDateTime now = LocalDateTime.now();
         final Instant accessExpirationInstant = now.plusMinutes(5).atZone(ZoneId.systemDefault()).toInstant();
         final Date accessExpiration = Date.from(accessExpirationInstant);
+
+        final String authorities = user.getRoles().stream()
+                .map(RoleEntity::getRole)
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
+
         return Jwts.builder()
                 .setSubject(user.getUsername())
                 .setExpiration(accessExpiration)
                 .signWith(jwtAccessSecret)
-                .claim("roles", user.getRoles())
+                .claim("roles", authorities)
                 .claim("username", user.getUsername())
                 .claim("userPicture", user.getUserPicture())
                 .compact();
@@ -61,7 +69,7 @@ public class JwtProvider {
 
 
     public Boolean validateAccessToken(@NonNull String accessToken) {
-        return validateToken(accessToken, jwtRefreshSecret);
+        return validateToken(accessToken, jwtAccessSecret);
     }
 
     public Boolean validateRefreshToken(@NonNull String refreshToken) {

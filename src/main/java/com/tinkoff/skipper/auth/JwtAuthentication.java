@@ -1,7 +1,5 @@
 package com.tinkoff.skipper.auth;
 
-import com.tinkoff.skipper.entity.RoleEntity;
-import com.tinkoff.skipper.entity.UserEntity;
 import lombok.Data;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,7 +12,7 @@ public class JwtAuthentication implements Authentication {
 
     private boolean authenticated;
     private String username;
-    private Set<RoleEntity> roles;
+    private Set<? extends GrantedAuthority> roles;
 
 
     @Override

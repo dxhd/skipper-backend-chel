@@ -17,7 +17,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("{id}")
     public ResponseEntity<UserEntity> getAllUserInfo(@PathVariable Long id) {
         return SkipperResponseBuilder.buildResponse(
@@ -36,7 +36,8 @@ public class UserController {
     }
 
     //TODO: Передавать параметром дто-шку
-    @PreAuthorize("hasAuthority('USER')")
+    //@PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasRole('USER')")
     @PutMapping("{id}/settings")
     public ResponseEntity<String> updateUserInfo(
             @PathVariable("id")Long id,
@@ -48,7 +49,7 @@ public class UserController {
         );
     }
 
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @DeleteMapping("{id}/settings")
     public ResponseEntity<String> deleteUser(@PathVariable("id") UserEntity user) {
         userService.deleteUser(user);
