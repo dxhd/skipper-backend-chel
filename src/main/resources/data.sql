@@ -1,5 +1,55 @@
-insert into users (description, email, phone_number, password)
-values ('some desc1', 'test1@mail.ru', 'dxhd', 'passss');
+insert into users (
+                   balance,
+                   birthdate,
+                   description,
+                   email,
+                   interests,
+                   password,
+                   phone_number,
+                   speciality,
+                   time_zone,
+                   user_picture,
+                   username
+                   )
+values (
+        100.03,
+        '09.09.2000',
+        'some desc1',
+        'test1@mail.ru',
+        'interests',
+        'passss',
+        '89005553535',
+        'professional drifter',
+        3,
+        'pictures/some_path_to_picture.jpg',
+        'dxhd'
+        );
+insert into users (
+    balance,
+    birthdate,
+    description,
+    email,
+    interests,
+    password,
+    phone_number,
+    speciality,
+    time_zone,
+    user_picture,
+    username
+)
+values (
+           222.03,
+           '10.09.2000',
+           'some desc2',
+           'test2@mail.ru',
+           'even_more_interests',
+           'dieantwoord',
+           '4511911213',
+           'comedian',
+           2,
+           'pictures/awesome_me.jpg',
+           'borba'
+       );
 insert into users (description, email, phone_number, password)
 values ('some desc1', 'test2@mail.ru', 'jjk', 'pass21s');
 insert into users (description, email, phone_number, password)
@@ -7,8 +57,32 @@ values ('some desc1', 'test3@mail.ru', 'chopper', 'pa23ssss');
 insert into users (description, email, phone_number, password)
 values ('some desc1', 'test4@mail.ru', 'cactus', 'passs432s');
 
-INSERT into mentor_info (education, subjects, user_id)
-VALUES ('susu4', 'programming', 2);
+INSERT into mentor_info (
+                         certificates,
+                         description,
+                         education,
+                         price,
+                         rating,
+                         speciality,
+                         number_of_students,
+                         subjects,
+                         username,
+                         work_experience,
+                         user_id
+                         )
+VALUES (
+        'certificate1_certificate2',
+        'i am a professional footbal watcher',
+        'susu4',
+        100,
+        4.2,
+        'programming',
+        2,
+        'sub1, sub2',
+        'Jimmy Treasure',
+        'It aint much but it is honest work',
+        2
+        );
 INSERT into mentor_info (education, subjects, user_id)
 VALUES ('susu4', 'cooking', 3);
 
