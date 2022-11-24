@@ -110,7 +110,3 @@ INSERT INto lessons (status, mentee_id, mentor_id, date_of_lesson)
 values ('PLANNED', 1, 2, '11-11-2022');
 INSERT INto lessons (status, mentee_id, mentor_id, date_of_lesson)
 values ('IN_PROGRESS', 1, 2, '12-10-2022');
-
-
-
-
