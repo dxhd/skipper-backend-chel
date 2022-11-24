@@ -3,6 +3,7 @@ package com.tinkoff.skipper.dto;
 import com.tinkoff.skipper.entity.UserEntity;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -12,7 +13,7 @@ public class UserMenteeProfileDto {
     private String userPicture;
     private String description;
     private String interests;
-    private Double timezone;
+    private BigDecimal timezone;
     private LocalDate registrationDate;
     private String speciality;
     //TODO: добавить статус "в сети"/"не в сети"

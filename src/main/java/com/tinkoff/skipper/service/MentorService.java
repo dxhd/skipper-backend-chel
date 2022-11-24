@@ -21,8 +21,12 @@ public class MentorService {
     private final UserRepo userRepo;
 
     public MentorProfileDto findById(Long id) {
-      return MentorProfileDto.toModel(mentorRepo.findById(id).orElseThrow(
-            () -> new SkipperBadRequestException("Пользователь не найден. Проверьте данные запроса.")));
+      return MentorProfileDto.toModel(
+          userRepo.findById(id).orElseThrow(
+            () -> new SkipperBadRequestException("Пользователь не найден. Проверьте данные запроса.")),
+          mentorRepo.findById(id).orElseThrow(
+            () -> new SkipperBadRequestException("Пользователь не найден. Проверьте данные запроса.")),
+          null);
     }
 
     public void save(MentorDto mentor)  {

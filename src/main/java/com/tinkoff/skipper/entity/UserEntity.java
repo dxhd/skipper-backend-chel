@@ -35,7 +35,7 @@ public class UserEntity {
    private String email;
    private BigDecimal balance;
    private Boolean isActive = true;
-   private Double timeZone;
+   private BigDecimal timeZone;
    private String speciality; //нужна ли специальность, ведь есть интересы?
 
    //добавить сущность "SubjectTag" и сделать связь @OneToMany
