@@ -38,36 +38,35 @@ public class UserMenteeProfileDto {
         model.setTimezone(entity.getTimeZone());
         model.setRegistrationDate(entity.getCreatedAt());
         model.setSpeciality(entity.getSpeciality());
-
-        model.setStats(stats);
-
-
-
-        // TODO: вынести вычисление в отдельный метод либо перенести в StatsDto
-
-        Double allLessons;
-        Double cancelledLessons;
-        Double attendance;
+        if (stats.getAllLessons()!=null) {
+            model.setStats(stats);
 
 
-        //вычисление посещаемости за всё время
-        allLessons = stats.getAllLessons().doubleValue();
-        cancelledLessons = stats.getCancelledLessons().doubleValue();
-        attendance = (100 - (cancelledLessons * 1.0) / allLessons);
-        model.setAttendance(attendance.intValue());
+            // TODO: вынести вычисление в отдельный метод либо перенести в StatsDto
 
-        //вычисление посещаемости за последний месяц
-        allLessons = stats.getAllLessonsPastMonth().doubleValue();
-        cancelledLessons = stats.getCancelledLessonsPastMonth().doubleValue();
-        attendance = (100 - (cancelledLessons * 1.0) / allLessons);
-        model.setAttendancePastMonth(attendance.intValue());
+            Double allLessons;
+            Double cancelledLessons;
+            Double attendance;
 
-        //вычисление посещаемости за последние 3 месяца
-        allLessons = stats.getAllLessonsPast3Month().doubleValue();
-        cancelledLessons = stats.getCancelledLessonsPast3Month().doubleValue();
-        attendance = (100 - (cancelledLessons * 1.0) / allLessons);
-        model.setAttendancePast3Month(attendance.intValue());
 
+            //вычисление посещаемости за всё время
+            allLessons = stats.getAllLessons().doubleValue();
+            cancelledLessons = stats.getCancelledLessons().doubleValue();
+            attendance = (100 - (cancelledLessons * 1.0) / allLessons);
+            model.setAttendance(attendance.intValue());
+
+            //вычисление посещаемости за последний месяц
+            allLessons = stats.getAllLessonsPastMonth().doubleValue();
+            cancelledLessons = stats.getCancelledLessonsPastMonth().doubleValue();
+            attendance = (100 - (cancelledLessons * 1.0) / allLessons);
+            model.setAttendancePastMonth(attendance.intValue());
+
+            //вычисление посещаемости за последние 3 месяца
+            allLessons = stats.getAllLessonsPast3Month().doubleValue();
+            cancelledLessons = stats.getCancelledLessonsPast3Month().doubleValue();
+            attendance = (100 - (cancelledLessons * 1.0) / allLessons);
+            model.setAttendancePast3Month(attendance.intValue());
+        }
         return model;
     }
 }

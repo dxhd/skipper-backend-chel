@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping(path = "api/mentor", produces = "application/json")
 @RequiredArgsConstructor
+@CrossOrigin(origins="http://localhost:8090")
 public class MentorController {
 
     private final MentorService mentorService;
@@ -29,7 +30,7 @@ public class MentorController {
         );
     }
 
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+//    @PreAuthorize("hasAuthority('ROLE_USER')")
     @PostMapping
     public ResponseEntity<String> createMentor(
             @RequestBody MentorDto newMentor) {
@@ -40,7 +41,7 @@ public class MentorController {
         );
     }
 
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+//    @PreAuthorize("hasAuthority('ROLE_USER')")
     @PutMapping(path = "{id}")
     public ResponseEntity<String> updateMentorProfile(
             @RequestBody MentorDataDto data,
@@ -52,7 +53,7 @@ public class MentorController {
         );
     }
 
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+//    @PreAuthorize("hasAuthority('ROLE_USER')")
     @DeleteMapping(path = "{id}")
     public ResponseEntity<String> deleteMentor(
             @PathVariable("id") Long id) {

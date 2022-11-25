@@ -37,7 +37,7 @@ public class JwtProvider {
 
     public String generateAccessToken(@NonNull UserEntity user) {
         final LocalDateTime now = LocalDateTime.now();
-        final Instant accessExpirationInstant = now.plusMinutes(5).atZone(ZoneId.systemDefault()).toInstant();
+        final Instant accessExpirationInstant = now.plusMinutes(20).atZone(ZoneId.systemDefault()).toInstant();
         final Date accessExpiration = Date.from(accessExpirationInstant);
 
         final String authorities = user.getRoles().stream()
