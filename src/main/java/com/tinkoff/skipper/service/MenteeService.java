@@ -1,8 +1,6 @@
 package com.tinkoff.skipper.service;
 
-import com.tinkoff.skipper.dto.StatsDto;
-import com.tinkoff.skipper.entity.UserEntity;
-import com.tinkoff.skipper.dto.UserMenteeProfileDto;
+import com.tinkoff.skipper.dto.MenteeProfileDto;
 import com.tinkoff.skipper.exception.SkipperBadRequestException;
 import com.tinkoff.skipper.repository.LessonRepo;
 import com.tinkoff.skipper.repository.UserRepo;
@@ -11,13 +9,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserMenteeService {
+public class MenteeService {
 
     private final LessonRepo lessonRepo;
     private final UserRepo userRepo;
 
-    public UserMenteeProfileDto getMenteeUserInfoById(Long id) {
-        return UserMenteeProfileDto.toModel(
+    public MenteeProfileDto getMenteeUserInfoById(Long id) {
+        return MenteeProfileDto.toModel(
                 userRepo.findById(id).orElseThrow(
                     () -> new SkipperBadRequestException(" Пользователь не найден")
                 ),
