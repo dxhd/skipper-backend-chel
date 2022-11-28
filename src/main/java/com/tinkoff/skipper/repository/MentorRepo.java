@@ -15,4 +15,6 @@ public interface MentorRepo extends JpaRepository<MentorInfoEntity, Long> {
 
     @Query(value = "select * from mentor_info where user_id = ?1", nativeQuery = true)
     Optional<MentorInfoEntity> findById(Long id);
+
+    Optional<MentorInfoEntity> findByUserId(Long id);
 }

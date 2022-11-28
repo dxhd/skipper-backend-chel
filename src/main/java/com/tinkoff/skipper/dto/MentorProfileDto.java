@@ -36,7 +36,7 @@ public class MentorProfileDto {
         model.setTimeZone(userEntity.getTimeZone());
         model.setSpeciality(mentorEntity.getSpeciality());
         model.setRating(mentorEntity.getRating());
-         model.setRegistrationDate(userEntity.getCreatedAt());
+        model.setRegistrationDate(userEntity.getCreatedAt());
         model.setId(userEntity.getId());
         return model;
     }

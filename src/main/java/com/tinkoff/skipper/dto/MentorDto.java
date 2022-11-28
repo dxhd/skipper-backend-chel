@@ -8,10 +8,8 @@ import java.math.BigDecimal;
 @Builder
 public class MentorDto { //TODO: добавить всем дто-шкам final и заменить @Data на @Getter и @Builder
     private final String subjects;
-    private final String username;
     private final BigDecimal price;
     private final String description;
-    private final BigDecimal rating;
     private final String workExperience;
     private final String certificates;
     private final String education;

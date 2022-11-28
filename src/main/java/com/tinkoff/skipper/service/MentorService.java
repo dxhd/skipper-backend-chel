@@ -46,6 +46,9 @@ public class MentorService {
     }
 
     private MentorInfoEntity createMentorInfo(MentorDto mentor) {
+        if (mentorRepo.findByUserId(mentor.getUserId()).isPresent()) {
+            throw new SkipperBadRequestException("Этот пользователь уже является ментором");
+        }
         MentorInfoEntity mentorInfoEntity = new MentorInfoEntity();
         BeanUtils.copyProperties(mentor, mentorInfoEntity, "userId");
         // TODO: query student number

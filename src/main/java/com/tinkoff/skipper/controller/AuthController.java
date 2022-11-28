@@ -17,7 +17,7 @@ import javax.security.auth.message.AuthException;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/auth")
-@CrossOrigin(origins="http://localhost:8090")
+@CrossOrigin(origins={ "http://localhost:8090", "http://localhost:3000" })
 public class AuthController {
 
     private final AuthService authService;
@@ -41,7 +41,7 @@ public class AuthController {
         );
     }
 
-//    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("refresh")
     public ResponseEntity<JwtResponse> getNewRefreshToken(@RequestBody RefreshJwtRequest request)
             throws AuthException {
