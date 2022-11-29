@@ -30,10 +30,10 @@ jobs:
           cache: maven
 
       - name: compile source code
-        run: mvn -B compile --file pom.xml
+        run: mvn -B compile --file pom.xml -P prod
 
       - name: build a package
-        run: mvn -B package --file pom.xml
+        run: mvn -B package --file pom.xml -P prod
 
       - name: upload server artifact
         uses: actions/upload-artifact@v3
