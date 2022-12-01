@@ -1,8 +1,10 @@
 package com.tinkoff.skipper.dto;
 
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 
-@Data
+@Getter
+@Builder
 public class RegisterRequest {
 
     private String phoneNumber;

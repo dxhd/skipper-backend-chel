@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 @Getter
 @Builder
-public class MentorDto { //TODO: добавить всем дто-шкам final и заменить @Data на @Getter и @Builder
+public class MentorDto {
     private final String subjects;
     private final BigDecimal price;
     private final String description;

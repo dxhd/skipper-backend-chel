@@ -1,14 +1,12 @@
 package com.tinkoff.skipper.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Builder
 public class JwtResponse {
-
     private final String type = "Bearer";
-    private String accessToken;
-    private String refreshToken;
-
+    private final String accessToken;
+    private final String refreshToken;
 }

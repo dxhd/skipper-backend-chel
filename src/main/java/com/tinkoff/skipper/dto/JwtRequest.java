@@ -1,11 +1,11 @@
 package com.tinkoff.skipper.dto;
 
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 
-@Data
+@Getter
+@Builder
 public class JwtRequest {
-
-    private String username;
-    private String password;
-
+    private final String username;
+    private final String password;
 }

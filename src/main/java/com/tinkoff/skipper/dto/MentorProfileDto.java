@@ -1,17 +1,16 @@
 package com.tinkoff.skipper.dto;
 
-import lombok.Data;
-
 import com.tinkoff.skipper.entity.MentorInfoEntity;
-
-import java.time.LocalDate;
-import java.math.BigDecimal;
-
 import com.tinkoff.skipper.entity.UserEntity;
+import lombok.Data;
+import lombok.Setter;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Data
 public class MentorProfileDto {
-    private String username; 
+    private String username;
     private String userPicture;
     private String description;
     private Integer studentNumber;
@@ -24,7 +23,6 @@ public class MentorProfileDto {
     private LocalDate registrationDate;
     private Long id;
 
-    // FIXME: merge model and dto
     public static MentorProfileDto toModel(UserEntity userEntity, MentorInfoEntity mentorEntity, StatsDto stats)
     {
         MentorProfileDto model = new MentorProfileDto();
@@ -38,6 +36,7 @@ public class MentorProfileDto {
         model.setRating(mentorEntity.getRating());
         model.setRegistrationDate(userEntity.getCreatedAt());
         model.setId(userEntity.getId());
+
         return model;
     }
 }

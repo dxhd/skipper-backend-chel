@@ -29,7 +29,11 @@ public class AuthService {
             final String accessToken = jwtProvider.generateAccessToken(user);
             final String refreshToken = jwtProvider.generateRefreshToken(user);
             refreshStorage.put(user.getUsername(), refreshToken);
-            return new JwtResponse(accessToken, refreshToken);
+            return JwtResponse.builder()
+                    .accessToken(accessToken)
+                    .refreshToken(refreshToken)
+                    .build();
+            //return new JwtResponse(accessToken, refreshToken);
         }
         else {
             throw new AuthException("Неправильный пароль");
@@ -45,10 +49,14 @@ public class AuthService {
             if (saveRefreshToken != null && saveRefreshToken.equals(refreshToken)) {
                 final UserEntity user = userService.getByUsername(username);
                 final String accessToken = jwtProvider.generateAccessToken(user);
-                return new JwtResponse(accessToken, null);
+                return JwtResponse.builder()
+                        .accessToken(accessToken)
+                        .build();
+                //return new JwtResponse(accessToken, null);
             }
         }
-        return new JwtResponse(null, null);
+        return JwtResponse.builder().build();
+        //return new JwtResponse(null, null);
     }
 
     public JwtResponse refresh(@NonNull String refreshToken) throws AuthException {
@@ -62,7 +70,11 @@ public class AuthService {
                 final String accessToken = jwtProvider.generateAccessToken(user);
                 final String newRefreshToken = jwtProvider.generateRefreshToken(user);
                 refreshStorage.put(user.getUsername(), newRefreshToken);
-                return new JwtResponse(accessToken, newRefreshToken);
+                JwtResponse.builder()
+                        .accessToken(accessToken)
+                        .refreshToken(refreshToken)
+                        .build();
+                //return new JwtResponse(accessToken, newRefreshToken);
             }
         }
         throw new AuthException("Невалидный JWT");
