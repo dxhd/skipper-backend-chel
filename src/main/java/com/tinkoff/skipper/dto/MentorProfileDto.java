@@ -32,7 +32,7 @@ public class MentorProfileDto {
         model.setStudentNumber(mentorEntity.getStudentNumber());
         model.setStats(stats);
         model.setTimeZone(userEntity.getTimeZone());
-        model.setSpeciality(mentorEntity.getSpeciality());
+        //model.setSpeciality(mentorEntity.getSpeciality());
         model.setRating(mentorEntity.getRating());
         model.setRegistrationDate(userEntity.getCreatedAt());
         model.setId(userEntity.getId());

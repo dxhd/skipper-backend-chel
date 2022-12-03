@@ -1,4 +1,4 @@
-package com.tinkoff.skipper.auth;
+package com.tinkoff.skipper.dto;
 
 import com.tinkoff.skipper.entity.RoleEntity;
 import lombok.Data;

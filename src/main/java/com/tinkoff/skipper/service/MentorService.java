@@ -5,6 +5,7 @@ import com.tinkoff.skipper.dto.MentorDto;
 import com.tinkoff.skipper.dto.MentorProfileDto;
 import com.tinkoff.skipper.entity.MentorInfoEntity;
 import com.tinkoff.skipper.exception.SkipperBadRequestException;
+import com.tinkoff.skipper.repository.CategoryRepo;
 import com.tinkoff.skipper.repository.MentorRepo;
 
 import com.tinkoff.skipper.repository.UserRepo;
@@ -19,6 +20,7 @@ public class MentorService {
 
     private final MentorRepo mentorRepo;
     private final UserRepo userRepo;
+    private final CategoryRepo categoryRepo;
 
     public MentorProfileDto findById(Long id) {
       return MentorProfileDto.toModel(
@@ -49,11 +51,15 @@ public class MentorService {
         if (mentorRepo.findByUserId(mentor.getUserId()).isPresent()) {
             throw new SkipperBadRequestException("Этот пользователь уже является ментором");
         }
+
         MentorInfoEntity mentorInfoEntity = new MentorInfoEntity();
         BeanUtils.copyProperties(mentor, mentorInfoEntity, "userId");
+
         // TODO: query student number
+
         mentorInfoEntity.setUser(userRepo.findById(mentor.getUserId()).orElseThrow(
                 () -> new SkipperBadRequestException("Невалидный пользователь.")));
+
         return mentorInfoEntity;
     }
 

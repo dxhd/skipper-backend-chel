@@ -1,12 +1,11 @@
 package com.tinkoff.skipper.utils;
 
-import com.tinkoff.skipper.auth.JwtAuthentication;
+import com.tinkoff.skipper.dto.JwtAuthentication;
 import com.tinkoff.skipper.entity.RoleEntity;
 import io.jsonwebtoken.Claims;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Marker;
 
 import java.util.Arrays;
 import java.util.Set;

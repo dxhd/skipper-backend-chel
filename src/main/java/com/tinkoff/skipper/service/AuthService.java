@@ -1,6 +1,6 @@
 package com.tinkoff.skipper.service;
 
-import com.tinkoff.skipper.auth.JwtAuthentication;
+import com.tinkoff.skipper.dto.JwtAuthentication;
 import com.tinkoff.skipper.dto.JwtRequest;
 import com.tinkoff.skipper.dto.JwtResponse;
 import com.tinkoff.skipper.entity.UserEntity;
