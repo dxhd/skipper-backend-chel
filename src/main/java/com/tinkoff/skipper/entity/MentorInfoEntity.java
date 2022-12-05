@@ -1,6 +1,7 @@
 package com.tinkoff.skipper.entity;
 
 import lombok.Data;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -9,7 +10,7 @@ import java.util.Set;
 @Entity
 @Data
 @Table (name = "mentor_info")
-public class MentorInfoEntity { 
+public class MentorInfoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,7 +18,7 @@ public class MentorInfoEntity {
     @OneToOne(fetch = FetchType.LAZY)
     private UserEntity user;
 
-    private String subjects;
+    //private String subjects;
     private String username;
     private BigDecimal price;
     private String description;
@@ -39,7 +40,15 @@ public class MentorInfoEntity {
             })
     private Set<TagEntity> tags = new HashSet<>();
 
-    @Column(name = "number_of_students")
-    private Integer studentNumber;
+    public void addTag(TagEntity tag) {
+        this.tags.add(tag);
+    }
+
+    public void removeTag(TagEntity tag) {
+        this.tags.remove(tag);
+    }
+
+//    @Column(name = "number_of_students")
+//    private Integer studentNumber;
 
 }

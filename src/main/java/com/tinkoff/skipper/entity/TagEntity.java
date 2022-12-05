@@ -1,13 +1,13 @@
 package com.tinkoff.skipper.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "tags")
+@Data
 public class TagEntity {
 
     @Id
@@ -19,6 +19,7 @@ public class TagEntity {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category", referencedColumnName = "name")
+//    @Convert(converter = CategoryConverter.class)
     private CategoryEntity category;
 
 }
