@@ -2,9 +2,9 @@ package com.tinkoff.skipper.controller;
 
 
 import com.tinkoff.skipper.service.AuthService;
-import com.tinkoff.skipper.dto.JwtRequest;
-import com.tinkoff.skipper.dto.JwtResponse;
-import com.tinkoff.skipper.dto.RefreshJwtRequest;
+import com.tinkoff.skipper.dto.authDto.JwtRequest;
+import com.tinkoff.skipper.dto.authDto.JwtResponse;
+import com.tinkoff.skipper.dto.authDto.RefreshJwtRequest;
 import com.tinkoff.skipper.utils.SkipperResponseBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

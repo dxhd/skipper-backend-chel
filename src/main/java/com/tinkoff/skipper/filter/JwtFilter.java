@@ -1,6 +1,6 @@
 package com.tinkoff.skipper.filter;
 
-import com.tinkoff.skipper.dto.JwtAuthentication;
+import com.tinkoff.skipper.dto.authDto.JwtAuthentication;
 import com.tinkoff.skipper.service.JwtProvider;
 import com.tinkoff.skipper.utils.JwtUtils;
 import io.jsonwebtoken.Claims;

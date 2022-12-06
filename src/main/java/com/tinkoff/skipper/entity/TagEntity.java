@@ -19,7 +19,6 @@ public class TagEntity {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category", referencedColumnName = "name")
-//    @Convert(converter = CategoryConverter.class)
     private CategoryEntity category;
 
 }

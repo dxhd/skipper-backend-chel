@@ -1,10 +1,7 @@
 package com.tinkoff.skipper.dto;
 
 import com.tinkoff.skipper.entity.UserEntity;
-import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,7 +12,7 @@ public class MenteeProfileDto {
     private String username;
     private String userPicture;
     private String description;
-    private String interests;
+    private String[] interests;
     private BigDecimal timezone;
     private LocalDate registrationDate;
     private String speciality;
@@ -30,11 +27,13 @@ public class MenteeProfileDto {
         model.setUsername(entity.getUsername());
         model.setUserPicture(entity.getUserPicture());
         model.setDescription(entity.getDescription());
-        model.setInterests(entity.getInterests());
+        model.setInterests(entity.getInterests().stream().map(
+                (interest) -> interest.getName()
+            ).toList().toArray(String[] :: new));
         model.setTimezone(entity.getTimeZone());
         model.setRegistrationDate(entity.getCreatedAt());
         model.setSpeciality(entity.getSpeciality());
-        if (stats.getAllLessons()!=null) {
+        if (stats.getAllLessons() != null) {
             model.setStats(stats);
         }
         return model;

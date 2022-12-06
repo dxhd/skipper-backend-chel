@@ -1,4 +1,4 @@
-package com.tinkoff.skipper.dto;
+package com.tinkoff.skipper.dto.authDto;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package com.tinkoff.skipper.utils;
 
-import com.tinkoff.skipper.dto.JwtAuthentication;
+import com.tinkoff.skipper.dto.authDto.JwtAuthentication;
 import com.tinkoff.skipper.entity.RoleEntity;
 import io.jsonwebtoken.Claims;
 import lombok.AccessLevel;

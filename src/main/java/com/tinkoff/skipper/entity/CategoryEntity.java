@@ -18,9 +18,4 @@ public class CategoryEntity {
     @OneToMany(mappedBy = "category")
     private Set<TagEntity> tags;
 
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "speciality")
-//    @JoinColumn(name = "mentors")
-//    private Set<UserEntity> mentors;
-
 }

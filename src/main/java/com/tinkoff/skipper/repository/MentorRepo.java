@@ -22,10 +22,12 @@ public interface MentorRepo extends JpaRepository<MentorInfoEntity, Long> {
     Optional<MentorInfoEntity> findByUserId(Long id);
 
 
-    @Query(
-            //TODO: запрос на выдачу менторов
+    @Query(value = "select * from mentor_info where " +
+            "category = 'programming' " +
+            "price between 0 and 9999999",
+            nativeQuery = true
     )
-    Page<SearchResultMentorDto> findAllByFilters(String speciality,
+    Page<SearchResultMentorDto> findAllByFilters(String category,
                                                  Integer minPrice,
                                                  Integer maxPrice,
                                                  Integer minRating,

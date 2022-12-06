@@ -1,8 +1,8 @@
 package com.tinkoff.skipper.service;
 
-import com.tinkoff.skipper.dto.JwtAuthentication;
-import com.tinkoff.skipper.dto.JwtRequest;
-import com.tinkoff.skipper.dto.JwtResponse;
+import com.tinkoff.skipper.dto.authDto.JwtAuthentication;
+import com.tinkoff.skipper.dto.authDto.JwtRequest;
+import com.tinkoff.skipper.dto.authDto.JwtResponse;
 import com.tinkoff.skipper.entity.UserEntity;
 import io.jsonwebtoken.Claims;
 import lombok.NonNull;
