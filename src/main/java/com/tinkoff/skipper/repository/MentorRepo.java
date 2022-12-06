@@ -1,7 +1,10 @@
 package com.tinkoff.skipper.repository;
 
+import com.tinkoff.skipper.dto.SearchResultMentorDto;
 import com.tinkoff.skipper.entity.MentorInfoEntity;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -17,4 +20,18 @@ public interface MentorRepo extends JpaRepository<MentorInfoEntity, Long> {
     Optional<MentorInfoEntity> findById(Long id);
 
     Optional<MentorInfoEntity> findByUserId(Long id);
+
+
+    @Query(
+            //TODO: запрос на выдачу менторов
+    )
+    Page<SearchResultMentorDto> findAllByFilters(String speciality,
+                                                 Integer minPrice,
+                                                 Integer maxPrice,
+                                                 Integer minRating,
+                                                 Integer maxRating,
+                                                 String[] tags,
+                                                 Pageable pageable
+                                                 );
+
 }

@@ -19,7 +19,7 @@ public class MentorInfoEntity {
     private UserEntity user;
 
     //private String subjects;
-    private String username;
+    //private String username;
     private BigDecimal price;
     private String description;
     private BigDecimal rating;
