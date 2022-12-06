@@ -24,7 +24,19 @@ public class AuthService {
 
     public JwtResponse login(@NonNull JwtRequest authRequest) throws AuthException {
 
-        final UserEntity user = userService.getByUsername(authRequest.getUsername());
+        String email = authRequest.getEmail();
+        String phoneNumber = authRequest.getPhoneNumber();
+        UserEntity user = null;
+
+        if (email != null) {
+            user = userService.getByEmail(email);
+        }
+
+        if (phoneNumber != null) {
+            user = userService.getByPhoneNumber(phoneNumber);
+        }
+
+
         if (user.getPassword().equals(authRequest.getPassword())) {
             final String accessToken = jwtProvider.generateAccessToken(user);
             final String refreshToken = jwtProvider.generateRefreshToken(user);
@@ -33,9 +45,7 @@ public class AuthService {
                     .accessToken(accessToken)
                     .refreshToken(refreshToken)
                     .build();
-            //return new JwtResponse(accessToken, refreshToken);
-        }
-        else {
+        } else {
             throw new AuthException("Неправильный пароль");
         }
     }

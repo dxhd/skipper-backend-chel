@@ -36,10 +36,16 @@ public class UserEntity {
    private BigDecimal balance;
    private Boolean isActive = true;
    private BigDecimal timeZone;
-   private String speciality; //нужна ли специальность, ведь есть интересы?
+   private String speciality;
 
-   //добавить сущность "SubjectTag" и сделать связь @OneToMany
-   private String interests;
+   @ManyToMany(fetch = FetchType.LAZY)
+   @JoinTable(name = "user_interests",
+   joinColumns = @JoinColumn (name = "user_id"),
+   inverseJoinColumns = {
+           @JoinColumn(name = "tag_id", referencedColumnName = "id"),
+           @JoinColumn(name = "tag_name", referencedColumnName = "name")
+   })
+   private Set<TagEntity> interests;
 
    @Temporal(TemporalType.DATE)
    private Date birthdate;
@@ -67,6 +73,14 @@ public class UserEntity {
 
    public void removeRole(RoleEntity role) {
       roles.remove(role);
+   }
+
+   public void addInterest(TagEntity tag) {
+      interests.add(tag);
+   }
+
+   public void removeInterest(TagEntity tag) {
+      interests.remove(tag);
    }
 
 }

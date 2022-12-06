@@ -11,7 +11,7 @@ public class SearchResultMentorDto {
 
     private final String username;
     private final String userPicture;
-//    private final String profession;
+    private final String speciality;
     private final String description;
     private final Float rating;
     private final BigDecimal price;

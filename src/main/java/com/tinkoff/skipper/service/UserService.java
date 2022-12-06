@@ -28,6 +28,17 @@ public class UserService {
                 () -> new SkipperBadRequestException("Пользователь не найден. Проверьте данные запроса."));
     }
 
+    public UserEntity getByPhoneNumber(String phoneNumber) {
+        return userRepo.findByPhoneNumber(phoneNumber).orElseThrow(
+                () -> new SkipperBadRequestException("Пользователь не найден. Проверьте данные запроса."));
+    }
+
+    public UserEntity getByEmail(String email) {
+        return userRepo.findByEmail(email).orElseThrow(
+                () -> new SkipperBadRequestException("Пользователь не найден. Проверьте данные запроса."));
+    }
+
+
     public UserEntity registerNewUser(RegisterRequest newUser) {
 
         if (userRepo.findByPhoneNumber(newUser.getPhoneNumber()).isPresent()) {

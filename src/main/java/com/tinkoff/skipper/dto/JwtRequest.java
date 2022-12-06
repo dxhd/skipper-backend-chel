@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class JwtRequest {
-    private final String username;
+    private final String phoneNumber;
+    private final String email;
     private final String password;
 }

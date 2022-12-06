@@ -18,18 +18,17 @@ public class MentorInfoEntity {
     @OneToOne(fetch = FetchType.LAZY)
     private UserEntity user;
 
-    //private String subjects;
-    //private String username;
     private BigDecimal price;
     private String description;
     private BigDecimal rating;
     private String workExperience;
     private String certificates;
     private String education;
+    private String speciality;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "speciality", referencedColumnName = "name")
-    private CategoryEntity speciality;
+    @JoinColumn(name = "category", referencedColumnName = "name")
+    private CategoryEntity category;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "mentor_tags",

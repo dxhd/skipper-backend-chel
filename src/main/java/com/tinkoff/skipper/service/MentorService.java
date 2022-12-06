@@ -4,7 +4,6 @@ import com.tinkoff.skipper.dto.MentorDataDto;
 import com.tinkoff.skipper.dto.MentorDto;
 import com.tinkoff.skipper.dto.MentorProfileDto;
 import com.tinkoff.skipper.entity.MentorInfoEntity;
-import com.tinkoff.skipper.entity.TagEntity;
 import com.tinkoff.skipper.exception.SkipperBadRequestException;
 import com.tinkoff.skipper.repository.CategoryRepo;
 import com.tinkoff.skipper.repository.MentorRepo;
@@ -15,9 +14,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -67,7 +63,7 @@ public class MentorService {
                 () -> new SkipperBadRequestException("Невалидный пользователь.")));
 
 
-        mentorInfoEntity.setSpeciality(categoryRepo.findByName(mentorDto.getSpeciality())
+        mentorInfoEntity.setCategory(categoryRepo.findByName(mentorDto.getSpeciality())
                 .orElseThrow(
                         () -> new SkipperBadRequestException("Такой категории не существует.")
                 ));
