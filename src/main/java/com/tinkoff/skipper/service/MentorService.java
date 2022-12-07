@@ -3,6 +3,7 @@ package com.tinkoff.skipper.service;
 import com.tinkoff.skipper.dto.MentorDataDto;
 import com.tinkoff.skipper.dto.MentorDto;
 import com.tinkoff.skipper.dto.MentorProfileDto;
+import com.tinkoff.skipper.entity.CategoryEntity;
 import com.tinkoff.skipper.entity.MentorInfoEntity;
 import com.tinkoff.skipper.exception.SkipperBadRequestException;
 import com.tinkoff.skipper.repository.CategoryRepo;
@@ -55,15 +56,15 @@ public class MentorService {
         }
 
         MentorInfoEntity mentorInfoEntity = new MentorInfoEntity();
-        BeanUtils.copyProperties(mentorDto, mentorInfoEntity, "userId", "speciality", "tags");
+        BeanUtils.copyProperties(mentorDto, mentorInfoEntity,
+                "userId", "category", "tags");
 
-        // TODO: query student number
+        //TODO: query student number
         //TODO: вынести все проверки и конвертацию из дто в энтити в отдельный класс
         mentorInfoEntity.setUser(userRepo.findById(mentorDto.getUserId()).orElseThrow(
                 () -> new SkipperBadRequestException("Невалидный пользователь.")));
 
-
-        mentorInfoEntity.setCategory(categoryRepo.findByName(mentorDto.getSpeciality())
+        mentorInfoEntity.setCategory(categoryRepo.findByName(mentorDto.getCategory())
                 .orElseThrow(
                         () -> new SkipperBadRequestException("Такой категории не существует.")
                 ));
@@ -77,5 +78,4 @@ public class MentorService {
 
         return mentorInfoEntity;
     }
-
 } 

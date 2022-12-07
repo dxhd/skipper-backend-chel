@@ -57,18 +57,15 @@ public class UserService {
         return userRepo.save(user);
     }
 
-    //TODO: Каждый пользователь может изменять только свою информацию по айдишнику
+    //TODO: протестировать метод полностью
     public UserEntity updateUserInfo(Long id, UserEntity updatedUserInfo) {
         UserEntity userInfoInDB = userRepo.findById(id)
                 .orElseThrow(() -> new SkipperNotFoundException("Такого пользователя не существует")
         );
-        //проверка на существование других пользователей с таким же юзернеймом, как нововведенный
-        //FIXME: проверка не должна срабатывать, если юзернейм null
-        if (userRepo.findByUsername(updatedUserInfo.getUsername()).isPresent()) {
-            throw new SkipperBadRequestException("Такое имя пользователя уже занято.");
-        }
-        //FIXME: пропадает значение столбца created_at при обновлении данных
-        BeanUtils.copyProperties(updatedUserInfo, userInfoInDB, "id");
+
+        BeanUtils.copyProperties(updatedUserInfo, userInfoInDB,
+                "id", "createdAt", "phoneNumber", "email", "password", "roles", "isActive");
+        log.info("Updated user info: " + userInfoInDB.toString());
         return userRepo.save(userInfoInDB);
     }
 

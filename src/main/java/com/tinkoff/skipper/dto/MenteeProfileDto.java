@@ -15,7 +15,7 @@ public class MenteeProfileDto {
     private String[] interests;
     private BigDecimal timezone;
     private LocalDate registrationDate;
-    private String speciality;
+    //private String speciality;
     private StatsDto stats;
 
     //TODO: добавить статус "в сети"/"не в сети", рейтинг менти и его менторскую информацию,
@@ -32,7 +32,7 @@ public class MenteeProfileDto {
             ).toList().toArray(String[] :: new));
         model.setTimezone(entity.getTimeZone());
         model.setRegistrationDate(entity.getCreatedAt());
-        model.setSpeciality(entity.getSpeciality());
+        //model.setSpeciality(entity.getSpeciality());
         if (stats.getAllLessons() != null) {
             model.setStats(stats);
         }

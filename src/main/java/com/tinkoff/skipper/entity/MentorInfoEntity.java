@@ -30,7 +30,7 @@ public class MentorInfoEntity {
     @JoinColumn(name = "category", referencedColumnName = "name")
     private CategoryEntity category;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "mentor_tags",
             joinColumns = @JoinColumn (name = "mentor_id"),
             inverseJoinColumns = {

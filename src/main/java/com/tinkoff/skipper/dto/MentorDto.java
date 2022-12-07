@@ -10,8 +10,9 @@ import java.util.Set;
 @Builder
 public class MentorDto {
 
-    private final String speciality;
+    private final String category;
     private final Set<String> tags;
+    private final String speciality;
     private final BigDecimal price;
     private final String description;
     private final String workExperience;

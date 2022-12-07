@@ -18,7 +18,7 @@ import java.util.Set;
 @Data
 @Table(name = "users",
         uniqueConstraints = @UniqueConstraint(
-                columnNames = { "username", "email", "phoneNumber" }))
+                columnNames = { "email", "phoneNumber" }))
 public class UserEntity {
 
    @Id
@@ -36,7 +36,7 @@ public class UserEntity {
    private BigDecimal balance;
    private Boolean isActive = true;
    private BigDecimal timeZone;
-   private String speciality;
+//   private String speciality;
 
    @ManyToMany(fetch = FetchType.LAZY)
    @JoinTable(name = "user_interests",
