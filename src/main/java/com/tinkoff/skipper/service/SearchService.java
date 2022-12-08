@@ -18,8 +18,8 @@ public class SearchService {
                 filters.getCategory(),
                 filters.getMinPrice(),
                 filters.getMaxPrice(),
-                filters.getMinRating(),
-                filters.getMaxRating(),
+//                filters.getMinRating(),
+//                filters.getMaxRating(),
                 filters.getTags(),
                 pageable
         );

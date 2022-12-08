@@ -35,7 +35,7 @@ public class MentorInfoEntity {
             joinColumns = @JoinColumn (name = "mentor_id"),
             inverseJoinColumns = {
                 @JoinColumn (name = "tag_id", referencedColumnName = "id"),
-                @JoinColumn(name = "tag", referencedColumnName = "name")
+                @JoinColumn(name = "tag_name", referencedColumnName = "name")
             })
     private Set<TagEntity> tags = new HashSet<>();
 
