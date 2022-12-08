@@ -1,6 +1,6 @@
 package com.tinkoff.skipper.controller;
 
-import com.tinkoff.skipper.dto.RegisterRequest;
+import com.tinkoff.skipper.dto.authDto.RegisterRequest;
 import com.tinkoff.skipper.entity.UserEntity;
 import com.tinkoff.skipper.service.UserService;
 import com.tinkoff.skipper.utils.SkipperResponseBuilder;

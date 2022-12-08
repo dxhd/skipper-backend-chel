@@ -1,6 +1,6 @@
 package com.tinkoff.skipper.service;
 
-import com.tinkoff.skipper.dto.RegisterRequest;
+import com.tinkoff.skipper.dto.authDto.RegisterRequest;
 import com.tinkoff.skipper.entity.RoleEntity;
 import com.tinkoff.skipper.entity.UserEntity;
 import com.tinkoff.skipper.exception.SkipperBadRequestException;
@@ -8,9 +8,11 @@ import com.tinkoff.skipper.exception.SkipperNotFoundException;
 import com.tinkoff.skipper.repository.RoleRepo;
 import com.tinkoff.skipper.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -28,6 +30,17 @@ public class UserService {
                 () -> new SkipperBadRequestException("Пользователь не найден. Проверьте данные запроса."));
     }
 
+    public UserEntity getByPhoneNumber(String phoneNumber) {
+        return userRepo.findByPhoneNumber(phoneNumber).orElseThrow(
+                () -> new SkipperBadRequestException("Пользователь не найден. Проверьте данные запроса."));
+    }
+
+    public UserEntity getByEmail(String email) {
+        return userRepo.findByEmail(email).orElseThrow(
+                () -> new SkipperBadRequestException("Пользователь не найден. Проверьте данные запроса."));
+    }
+
+
     public UserEntity registerNewUser(RegisterRequest newUser) {
 
         if (userRepo.findByPhoneNumber(newUser.getPhoneNumber()).isPresent()) {
@@ -44,18 +57,15 @@ public class UserService {
         return userRepo.save(user);
     }
 
-    //TODO: Каждый пользователь может изменять только свою информацию по айдишнику
+    //TODO: протестировать метод полностью
     public UserEntity updateUserInfo(Long id, UserEntity updatedUserInfo) {
         UserEntity userInfoInDB = userRepo.findById(id)
                 .orElseThrow(() -> new SkipperNotFoundException("Такого пользователя не существует")
         );
-        //проверка на существование других пользователей с таким же юзернеймом, как нововведенный
-        //FIXME: проверка не должна срабатывать, если юзернейм null
-        if (userRepo.findByUsername(updatedUserInfo.getUsername()).isPresent()) {
-            throw new SkipperBadRequestException("Такое имя пользователя уже занято.");
-        }
-        //FIXME: пропадает значение столбца created_at при обновлении данных
-        BeanUtils.copyProperties(updatedUserInfo, userInfoInDB, "id");
+
+        BeanUtils.copyProperties(updatedUserInfo, userInfoInDB,
+                "id", "createdAt", "phoneNumber", "email", "password", "roles", "isActive");
+        log.info("Updated user info: " + userInfoInDB.toString());
         return userRepo.save(userInfoInDB);
     }
 

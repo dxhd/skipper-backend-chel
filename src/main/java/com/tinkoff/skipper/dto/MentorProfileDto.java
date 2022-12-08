@@ -1,17 +1,16 @@
 package com.tinkoff.skipper.dto;
 
+import com.tinkoff.skipper.entity.MentorInfoEntity;
+import com.tinkoff.skipper.entity.UserEntity;
 import lombok.Data;
 
-import com.tinkoff.skipper.entity.MentorInfoEntity;
-
-import java.time.LocalDate;
 import java.math.BigDecimal;
-
-import com.tinkoff.skipper.entity.UserEntity;
+import java.time.LocalDate;
 
 @Data
 public class MentorProfileDto {
-    private String username; 
+
+    private String username;
     private String userPicture;
     private String description;
     private Integer studentNumber;
@@ -24,20 +23,20 @@ public class MentorProfileDto {
     private LocalDate registrationDate;
     private Long id;
 
-    // FIXME: merge model and dto
-    public static MentorProfileDto toModel(UserEntity userEntity, MentorInfoEntity mentorEntity, StatsDto stats)
+    public static MentorProfileDto toModel(UserEntity userEntity, MentorInfoEntity mentorInfoEntity, StatsDto stats)
     {
         MentorProfileDto model = new MentorProfileDto();
-        model.setUsername(mentorEntity.getUsername());
-        model.setDescription(mentorEntity.getDescription());
+        model.setUsername(mentorInfoEntity.getUser().getUsername());
+        model.setDescription(mentorInfoEntity.getDescription());
         model.setUserPicture(userEntity.getUserPicture());
-        model.setStudentNumber(mentorEntity.getStudentNumber());
+        //model.setStudentNumber(mentorInfoEntity.getStudentNumber());
         model.setStats(stats);
         model.setTimeZone(userEntity.getTimeZone());
-        model.setSpeciality(mentorEntity.getSpeciality());
-        model.setRating(mentorEntity.getRating());
+        model.setSpeciality(mentorInfoEntity.getSpeciality());
+        model.setRating(mentorInfoEntity.getRating());
         model.setRegistrationDate(userEntity.getCreatedAt());
         model.setId(userEntity.getId());
+
         return model;
     }
 }

@@ -12,33 +12,30 @@ public class MenteeProfileDto {
     private String username;
     private String userPicture;
     private String description;
-    private String interests;
+    private String[] interests;
     private BigDecimal timezone;
     private LocalDate registrationDate;
-    private String speciality;
-    //TODO: добавить статус "в сети"/"не в сети"
-
-    //stats
+    //private String speciality;
     private StatsDto stats;
 
-    //private double rating;
-    //private Set<MentorInfoEntity> mentorInfo;
+    //TODO: добавить статус "в сети"/"не в сети", рейтинг менти и его менторскую информацию,
+    // если он им является
+
 
     public static MenteeProfileDto toModel(UserEntity entity, StatsDto stats) {
         MenteeProfileDto model = new MenteeProfileDto();
-
         model.setUsername(entity.getUsername());
         model.setUserPicture(entity.getUserPicture());
         model.setDescription(entity.getDescription());
-        model.setInterests(entity.getInterests());
+        model.setInterests(entity.getInterests().stream().map(
+                (interest) -> interest.getName()
+            ).toList().toArray(String[] :: new));
         model.setTimezone(entity.getTimeZone());
         model.setRegistrationDate(entity.getCreatedAt());
-        model.setSpeciality(entity.getSpeciality());
-
-        if (stats.getAllLessons()!=null) {
+        //model.setSpeciality(entity.getSpeciality());
+        if (stats.getAllLessons() != null) {
             model.setStats(stats);
         }
-
         return model;
     }
 }

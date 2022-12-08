@@ -1,8 +1,8 @@
 package com.tinkoff.skipper.service;
 
-import com.tinkoff.skipper.auth.JwtAuthentication;
-import com.tinkoff.skipper.dto.JwtRequest;
-import com.tinkoff.skipper.dto.JwtResponse;
+import com.tinkoff.skipper.dto.authDto.JwtAuthentication;
+import com.tinkoff.skipper.dto.authDto.JwtRequest;
+import com.tinkoff.skipper.dto.authDto.JwtResponse;
 import com.tinkoff.skipper.entity.UserEntity;
 import io.jsonwebtoken.Claims;
 import lombok.NonNull;
@@ -24,14 +24,28 @@ public class AuthService {
 
     public JwtResponse login(@NonNull JwtRequest authRequest) throws AuthException {
 
-        final UserEntity user = userService.getByUsername(authRequest.getUsername());
+        String email = authRequest.getEmail();
+        String phoneNumber = authRequest.getPhoneNumber();
+        UserEntity user = null;
+
+        if (email != null) {
+            user = userService.getByEmail(email);
+        }
+
+        if (phoneNumber != null) {
+            user = userService.getByPhoneNumber(phoneNumber);
+        }
+
+
         if (user.getPassword().equals(authRequest.getPassword())) {
             final String accessToken = jwtProvider.generateAccessToken(user);
             final String refreshToken = jwtProvider.generateRefreshToken(user);
             refreshStorage.put(user.getUsername(), refreshToken);
-            return new JwtResponse(accessToken, refreshToken);
-        }
-        else {
+            return JwtResponse.builder()
+                    .accessToken(accessToken)
+                    .refreshToken(refreshToken)
+                    .build();
+        } else {
             throw new AuthException("Неправильный пароль");
         }
     }
@@ -45,10 +59,14 @@ public class AuthService {
             if (saveRefreshToken != null && saveRefreshToken.equals(refreshToken)) {
                 final UserEntity user = userService.getByUsername(username);
                 final String accessToken = jwtProvider.generateAccessToken(user);
-                return new JwtResponse(accessToken, null);
+                return JwtResponse.builder()
+                        .accessToken(accessToken)
+                        .build();
+                //return new JwtResponse(accessToken, null);
             }
         }
-        return new JwtResponse(null, null);
+        return JwtResponse.builder().build();
+        //return new JwtResponse(null, null);
     }
 
     public JwtResponse refresh(@NonNull String refreshToken) throws AuthException {
@@ -62,7 +80,11 @@ public class AuthService {
                 final String accessToken = jwtProvider.generateAccessToken(user);
                 final String newRefreshToken = jwtProvider.generateRefreshToken(user);
                 refreshStorage.put(user.getUsername(), newRefreshToken);
-                return new JwtResponse(accessToken, newRefreshToken);
+                JwtResponse.builder()
+                        .accessToken(accessToken)
+                        .refreshToken(refreshToken)
+                        .build();
+                //return new JwtResponse(accessToken, newRefreshToken);
             }
         }
         throw new AuthException("Невалидный JWT");

@@ -53,6 +53,7 @@ public class JwtProvider {
                 .claim("userId", user.getId())
                 .claim("username", user.getUsername())
                 .claim("userPicture", user.getUserPicture())
+                .claim("isMentor", user.getMentorInfo() != null)
                 .compact();
 
     }

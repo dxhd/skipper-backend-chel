@@ -3,11 +3,16 @@ package com.tinkoff.skipper.dto;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Builder
-public class MentorDto { //TODO: добавить всем дто-шкам final и заменить @Data на @Getter и @Builder
-    private final String subjects;
+public class MentorDto {
+
+    private final String category;
+    private final Set<String> tags;
+    private final String speciality;
     private final BigDecimal price;
     private final String description;
     private final String workExperience;

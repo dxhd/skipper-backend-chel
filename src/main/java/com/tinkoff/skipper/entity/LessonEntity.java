@@ -3,7 +3,9 @@ package com.tinkoff.skipper.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @Entity
@@ -26,11 +28,12 @@ public class LessonEntity {
     @JoinColumn(name = "mentee_id")
     private UserEntity menteeId;
 
+    private String lessonType;
+    private Integer lessonLength;
+    private BigDecimal lessonCost;
 
-    private OffsetDateTime schedule;
-
-    @Column(name = "date_of_lesson")
-    private LocalDate lessonDate;
+    @Column(name = "date_and_time_of_lesson")
+    private LocalDateTime lessonDateTime;
 
     public enum Status {
         CANCELLED,

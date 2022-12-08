@@ -3,10 +3,13 @@ package com.tinkoff.skipper.service;
 import com.tinkoff.skipper.dto.MentorDataDto;
 import com.tinkoff.skipper.dto.MentorDto;
 import com.tinkoff.skipper.dto.MentorProfileDto;
+import com.tinkoff.skipper.entity.CategoryEntity;
 import com.tinkoff.skipper.entity.MentorInfoEntity;
 import com.tinkoff.skipper.exception.SkipperBadRequestException;
+import com.tinkoff.skipper.repository.CategoryRepo;
 import com.tinkoff.skipper.repository.MentorRepo;
 
+import com.tinkoff.skipper.repository.TagRepo;
 import com.tinkoff.skipper.repository.UserRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,8 @@ public class MentorService {
 
     private final MentorRepo mentorRepo;
     private final UserRepo userRepo;
+    private final CategoryRepo categoryRepo;
+    private final TagRepo tagRepo;
 
     public MentorProfileDto findById(Long id) {
       return MentorProfileDto.toModel(
@@ -34,27 +39,43 @@ public class MentorService {
     }
 
     public void update(Long id, MentorDataDto data) {
-        MentorInfoEntity mentorEntity = mentorRepo.findById(id).orElseThrow(
+        MentorInfoEntity mentorInfoEntity = mentorRepo.findById(id).orElseThrow(
                 () -> new SkipperBadRequestException("No such mentor")
         );
-        BeanUtils.copyProperties(data, mentorEntity);
-        mentorRepo.save(mentorEntity);
+        BeanUtils.copyProperties(data, mentorInfoEntity);
+        mentorRepo.save(mentorInfoEntity);
     }
 
     public void delete(Long id) {
         mentorRepo.deleteById(id);
     }
 
-    private MentorInfoEntity createMentorInfo(MentorDto mentor) {
-        if (mentorRepo.findByUserId(mentor.getUserId()).isPresent()) {
+    private MentorInfoEntity createMentorInfo(MentorDto mentorDto) {
+        if (mentorRepo.findByUserId(mentorDto.getUserId()).isPresent()) {
             throw new SkipperBadRequestException("Этот пользователь уже является ментором");
         }
+
         MentorInfoEntity mentorInfoEntity = new MentorInfoEntity();
-        BeanUtils.copyProperties(mentor, mentorInfoEntity, "userId");
-        // TODO: query student number
-        mentorInfoEntity.setUser(userRepo.findById(mentor.getUserId()).orElseThrow(
+        BeanUtils.copyProperties(mentorDto, mentorInfoEntity,
+                "userId", "category", "tags");
+
+        //TODO: query student number
+        //TODO: вынести все проверки и конвертацию из дто в энтити в отдельный класс
+        mentorInfoEntity.setUser(userRepo.findById(mentorDto.getUserId()).orElseThrow(
                 () -> new SkipperBadRequestException("Невалидный пользователь.")));
+
+        mentorInfoEntity.setCategory(categoryRepo.findByName(mentorDto.getCategory())
+                .orElseThrow(
+                        () -> new SkipperBadRequestException("Такой категории не существует.")
+                ));
+
+        for (String tag :
+                mentorDto.getTags()) {
+            mentorInfoEntity.addTag(tagRepo.findByName(tag)
+                    .orElseThrow(
+                            () -> new SkipperBadRequestException("Тега " + tag + " не существует.")));
+        }
+
         return mentorInfoEntity;
     }
-
 } 
