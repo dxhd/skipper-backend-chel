@@ -14,6 +14,7 @@ public class JwtAuthentication implements Authentication {
     private boolean authenticated;
     private String username;
     private Long userId;
+    private boolean isMentor;
     private Set<RoleEntity.Role> roles;
 
 
@@ -34,7 +35,7 @@ public class JwtAuthentication implements Authentication {
 
     @Override
     public Object getPrincipal() {
-        return username;
+        return isMentor;
     }
 
     @Override
