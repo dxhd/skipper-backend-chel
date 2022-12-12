@@ -52,6 +52,7 @@ public class JwtProvider {
                 .claim("roles", authorities)
                 .claim("userId", user.getId())
                 .claim("username", user.getUsername())
+                .claim("phoneNumber", user.getPhoneNumber())
                 .claim("userPicture", user.getUserPicture())
                 .claim("isMentor", user.getMentorInfo() != null)
                 .compact();
@@ -63,7 +64,7 @@ public class JwtProvider {
         final Instant refreshExpirationInstant = now.plusDays(30).atZone(ZoneId.systemDefault()).toInstant();
         final Date refreshExpiration = Date.from(refreshExpirationInstant);
         return Jwts.builder()
-                .setSubject(user.getUsername())
+                .setSubject(user.getPhoneNumber())
                 .setExpiration(refreshExpiration)
                 .setPayload(String.valueOf("isMentor: " + user.getMentorInfo() != null))
                 .signWith(jwtRefreshSecret)
