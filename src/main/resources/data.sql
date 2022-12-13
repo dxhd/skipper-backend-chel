@@ -3,7 +3,6 @@ insert into users (
                    birthdate,
                    description,
                    email,
-                   interests,
                    password,
                    phone_number,
                    speciality,
