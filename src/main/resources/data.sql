@@ -69,8 +69,8 @@ VALUES (
         'It aint much but it is honest work',
         2
         );
-INSERT into mentor_info (education, subjects, user_id)
-VALUES ('susu4', 'cooking', 3);
+INSERT into mentor_info (education, user_id)
+VALUES ('susu4', 3);
 
 INSERT INto lessons (status, mentee_id, mentor_id, date_of_lesson)
 values ('FINISHED', 1, 1, '2022-09-12');
