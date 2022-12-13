@@ -56,8 +56,6 @@ INSERT into mentor_info (
                          price,
                          rating,
                          speciality,
-                         subjects,
-                         username,
                          work_experience,
                          user_id
                          )
@@ -68,8 +66,6 @@ VALUES (
         100,
         4.2,
         'programming',
-        'sub1, sub2',
-        'Jimmy Treasure',
         'It aint much but it is honest work',
         2
         );
