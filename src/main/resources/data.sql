@@ -5,7 +5,6 @@ insert into users (
                    email,
                    password,
                    phone_number,
-                   speciality,
                    time_zone,
                    user_picture,
                    username
@@ -17,7 +16,6 @@ values (
         'test1@mail.ru',
         'passss',
         '89005553535',
-        'professional drifter',
         3,
         'pictures/some_path_to_picture.jpg',
         'dxhd'
@@ -29,7 +27,6 @@ insert into users (
     email,
     password,
     phone_number,
-    speciality,
     time_zone,
     user_picture,
     username
@@ -41,7 +38,6 @@ values (
            'test2@mail.ru',
            'dieantwoord',
            '4511911213',
-           'comedian',
            2,
            'pictures/awesome_me.jpg',
            'borba'
