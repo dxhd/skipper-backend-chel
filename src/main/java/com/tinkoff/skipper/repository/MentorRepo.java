@@ -23,7 +23,7 @@ public interface MentorRepo extends JpaRepository<MentorInfoEntity, Long> {
 
 
     @Query(value = "select distinct " +
-            "users.username, users.user_picture," +
+            "users.id, users.username, users.user_picture," +
             "mentor_info.speciality, mentor_info.description, mentor_info.rating, mentor_info.price " +
             "from mentor_info " +
             "join users on mentor_info.user_id = users.id " +
