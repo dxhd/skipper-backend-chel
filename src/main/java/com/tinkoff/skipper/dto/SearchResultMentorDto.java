@@ -9,6 +9,8 @@ import java.math.BigDecimal;
 @Builder
 public class SearchResultMentorDto {
 
+    private final Long id;
+
     private final String username;
     private final String userPicture;
     private final String speciality;

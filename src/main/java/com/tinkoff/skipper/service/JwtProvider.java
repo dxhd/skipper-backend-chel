@@ -66,7 +66,8 @@ public class JwtProvider {
         return Jwts.builder()
                 .setSubject(user.getPhoneNumber())
                 .setExpiration(refreshExpiration)
-                .setPayload(String.valueOf("isMentor: " + user.getMentorInfo() != null))
+                //.setClaims("isMentor", (user.getMentorInfo() != null))
+//                .setPayload(String.valueOf("isMentor: " + user.getMentorInfo() != null))
                 .signWith(jwtRefreshSecret)
                 .compact();
     }
