@@ -19,6 +19,18 @@ public class SearchService {
     private final TagRepo tagRepo;
 
     public Page<SearchResultMentorDto> findByFilters(SearchFiltersDto filters, Pageable pageable) {
+
+        if (filters.getTags().length == 0) {
+            return mentorRepo.findAllByFiltersWithoutTags(
+                    filters.getCategory(),
+                    filters.getMinPrice(),
+                    filters.getMaxPrice(),
+//                filters.getMinRating(),
+//                filters.getMaxRating(),
+                    pageable
+            );
+        }
+
         return mentorRepo.findAllByFilters(
                 filters.getCategory(),
                 filters.getMinPrice(),
