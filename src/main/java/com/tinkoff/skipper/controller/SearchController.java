@@ -6,6 +6,7 @@ import com.tinkoff.skipper.service.SearchService;
 import com.tinkoff.skipper.utils.SkipperResponseBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -31,9 +32,10 @@ public class SearchController {
     }
 
     @PostMapping("{category}")
+    @PageableAsQueryParam
     public Page<SearchResultMentorDto> searchWithFilters(@PathVariable String category,
-                                                         @RequestBody SearchFiltersDto filters,
-                                                         @PageableDefault(sort = { "price" }, direction = Sort.Direction.ASC) Pageable pageable) {
+                                                         @RequestBody SearchFiltersDto filters,/*
+                                                      @PageableDefault(size = 12, page = 0, sort = { "price" }, direction = Sort.Direction.ASC) */Pageable pageable) {
         filters.setCategory(category);
         //TODO: поиск по фильтрам, вернуть Pagination
         return searchService.findByFilters(filters, pageable);
