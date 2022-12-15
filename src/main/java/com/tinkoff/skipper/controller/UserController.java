@@ -51,6 +51,20 @@ public class UserController {
         );
     }
 
+
+    @PreAuthorize("isAuthenticated() and (authentication.details == #id)")
+    @PatchMapping(value = "{id}/settings", produces = "image/jpg")
+    public ResponseEntity<String> updateUserImage(
+            @PathVariable("id")Long id,
+            @RequestBody UserEntity updatedInfo) {
+        userService.updateUserInfo(id, updatedInfo);
+        return SkipperResponseBuilder.buildResponse(
+                HttpStatus.OK,
+                "Информация пользователя обновлена."
+        );
+    }
+
+
     @PreAuthorize("isAuthenticated() and (authentication.details == #id)")
     @DeleteMapping("{id}/settings")
     public ResponseEntity<String> deleteUser(@PathVariable("id") UserEntity user) {
