@@ -13,6 +13,10 @@ import java.util.Optional;
 @Repository
 public interface LessonRepo extends JpaRepository<LessonEntity, Long> {
 
+    @Query(value = "update lessons set status = 'FINISHED' where date_and_time_of_lesson < current_timestamp",
+        nativeQuery = true)
+    void updateStatus();
+
     @Query(value = "select " +
             "sum(case when mentee_id = :userId then 1 else 0 end) as allLessons, " +
             "sum(case when mentee_id = :userId and status = 'CANCELLED' then 1 else 0 end) as cancelledLessons, " +
@@ -22,7 +26,17 @@ public interface LessonRepo extends JpaRepository<LessonEntity, Long> {
             "sum(case when mentee_id = :userId and date_and_time_of_lesson > current_date - INTERVAL '3' MONTH and status = 'CANCELLED' then 1 else 0 end) as cancelledLessonsPast3Month \n" +
             "from lessons",
             nativeQuery = true)
-    Optional<StatsDto> countAllLessons(@Param("userId") Long menteeId);
+    Optional<StatsDto> countAllMenteeLessons(@Param("userId") Long menteeId);
+    @Query(value = "select " +
+            "sum(case when mentor_id = :userId then 1 else 0 end) as allLessons, " +
+            "sum(case when mentor_id = :userId and status = 'CANCELLED' then 1 else 0 end) as cancelledLessons, " +
+            "sum(case when mentor_id = :userId and date_and_time_of_lesson > current_date - INTERVAL '1' MONTH then 1 else 0 end) as allLessonsPastMonth, \n" +
+            "sum(case when mentor_id = :userId and date_and_time_of_lesson > current_date - INTERVAL '1' MONTH and status = 'CANCELLED' then 1 else 0 end) as cancelledLessonsPastMonth, \n" +
+            "sum(case when mentor_id = :userId and date_and_time_of_lesson > current_date - INTERVAL '3' MONTH then 1 else 0 end) as allLessonsPast3Month, \n" +
+            "sum(case when mentor_id = :userId and date_and_time_of_lesson > current_date - INTERVAL '3' MONTH and status = 'CANCELLED' then 1 else 0 end) as cancelledLessonsPast3Month \n" +
+            "from lessons",
+            nativeQuery = true)
+    Optional<StatsDto> countAllMentorLessons(@Param("userId") Long mentorId);
 
 }
 
