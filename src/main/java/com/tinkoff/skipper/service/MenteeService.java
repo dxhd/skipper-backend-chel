@@ -15,11 +15,12 @@ public class MenteeService {
     private final UserRepo userRepo;
 
     public MenteeProfileDto getMenteeUserInfoById(Long id) {
+        lessonRepo.updateStatus();
         return MenteeProfileDto.toModel(
                 userRepo.findById(id).orElseThrow(
                     () -> new SkipperBadRequestException(" Пользователь не найден")
                 ),
-                lessonRepo.countAllLessons(id).orElseThrow(
+                lessonRepo.countAllMenteeLessons(id).orElseThrow(
                     () -> new SkipperBadRequestException("Невозможно подсчитать количество занятий"))
         );
     }
