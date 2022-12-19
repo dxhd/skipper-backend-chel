@@ -7,6 +7,7 @@ import com.tinkoff.skipper.entity.MentorInfoEntity;
 import com.tinkoff.skipper.exception.SkipperBadRequestException;
 import com.tinkoff.skipper.repository.*;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MentorService {
 
     private final MentorRepo mentorRepo;
@@ -23,13 +25,18 @@ public class MentorService {
     private final TagRepo tagRepo;
 
     public MentorProfileDto findById(Long id) {
-        lessonRepo.updateStatus();
+        Long mentorId = mentorRepo.findById(id).orElseThrow(
+                () -> new SkipperBadRequestException("Пользователь не найден. Проверьте данные запроса.")).getId();
+
+        try {
+            lessonRepo.updateStatus();
+        } catch (Exception e) { log.error(e.getMessage());}
         return MentorProfileDto.toModel(
               userRepo.findById(id).orElseThrow(
                 () -> new SkipperBadRequestException("Пользователь не найден. Проверьте данные запроса.")),
               mentorRepo.findById(id).orElseThrow(
                 () -> new SkipperBadRequestException("Пользователь не найден. Проверьте данные запроса.")),
-              lessonRepo.countAllMentorLessons(id).orElseThrow(
+              lessonRepo.countAllMentorLessons(mentorId).orElseThrow(
                 () -> new SkipperBadRequestException("Невозможно подсчитать количество занятий")
               ));
     }
