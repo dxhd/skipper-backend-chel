@@ -15,5 +15,7 @@ public interface TagRepo extends JpaRepository<TagEntity, Long> {
     @Query (value = "select name from tags where category = :category",
         nativeQuery = true)
     Collection<String> findAllByCategory(String category);
+
+    Collection<String> findAllByCategoryId(Long id);
 }
 

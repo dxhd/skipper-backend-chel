@@ -16,32 +16,23 @@ public class LessonEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-
-    //связь занятий с менторами
     @ManyToOne
     @JoinColumn(name = "mentor_id")
     private MentorInfoEntity mentorId;
-
-    //связь занятий с менти (UserEntity)
     @ManyToOne
     @JoinColumn(name = "mentee_id")
     private UserEntity menteeId;
-
-    private String lessonType;
-    private Integer lessonLength;
-    private BigDecimal lessonCost;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lesson_tepmlate", referencedColumnName = "id")
+    private LessonTemplateEntity lessonTemplate;
     @Column(name = "date_and_time_of_lesson")
     private LocalDateTime lessonDateTime;
-
+    @Enumerated(EnumType.STRING)
+    private Status status;
     public enum Status {
         CANCELLED,
         FINISHED,
         PLANNED,
         IN_PROGRESS
     }
-    @Enumerated(EnumType.STRING)
-    private Status status;
-
 }

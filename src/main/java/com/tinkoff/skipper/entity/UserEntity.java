@@ -8,8 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,24 +31,22 @@ public class UserEntity {
    private String password;
    private String username;
    private String description;
-   private String userPicture;
+   private String userPictureURL;
    private String email;
-   private BigDecimal balance;
    private Boolean isActive = true;
-   private BigDecimal timeZone;
-//   private String speciality;
+   private ZoneId timeZone;
+   @Temporal(TemporalType.DATE)
+   private Date birthdate;
+   @CreationTimestamp
+   private LocalDate createdAt;
 
    @ManyToMany(fetch = FetchType.LAZY)
    @JoinTable(name = "user_interests",
    joinColumns = @JoinColumn (name = "user_id"),
    inverseJoinColumns = {
-           @JoinColumn(name = "tag_id", referencedColumnName = "id"),
-           @JoinColumn(name = "tag_name", referencedColumnName = "name")
+           @JoinColumn(name = "tag_id", referencedColumnName = "id")
    })
    private Set<TagEntity> interests;
-
-   @Temporal(TemporalType.DATE)
-   private Date birthdate;
 
    @Enumerated(EnumType.STRING)
    @ManyToMany(fetch = FetchType.EAGER)
@@ -64,13 +62,28 @@ public class UserEntity {
    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
    private MentorInfoEntity mentorInfo;
 
-   @CreationTimestamp
-   private LocalDate createdAt;
+   @ManyToMany(fetch = FetchType.LAZY)
+   @JoinTable(name = "user_favourites",
+           joinColumns = @JoinColumn (name = "user_id"),
+           inverseJoinColumns = {
+                   @JoinColumn(name = "mentor_id", referencedColumnName = "id")
+           })
+   private Set<MentorInfoEntity> favouriteMentors;
+
+
+   public void addFavourite(MentorInfoEntity mentor) {
+      favouriteMentors.add(mentor);
+   }
+   public void deleteFavourite(MentorInfoEntity mentor) {
+      favouriteMentors.remove(mentor);
+   }
+   public void clearFavourites() {
+      favouriteMentors.clear();
+   }
 
    public void addRole(RoleEntity role) {
       roles.add(role);
    }
-
    public void removeRole(RoleEntity role) {
       roles.remove(role);
    }
@@ -78,9 +91,11 @@ public class UserEntity {
    public void addInterest(TagEntity tag) {
       interests.add(tag);
    }
-
    public void removeInterest(TagEntity tag) {
       interests.remove(tag);
+   }
+   public void clearInterests() {
+      interests.clear();
    }
 
 }

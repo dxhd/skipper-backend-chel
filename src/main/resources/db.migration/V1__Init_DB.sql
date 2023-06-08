@@ -72,7 +72,7 @@ create table users (
     phone_number varchar(255),
     speciality varchar(255),
     time_zone numeric(19, 2),
-    user_picture varchar(255),
+    user_pictureurl varchar(255),
     username varchar(255),
     primary key (id)
 );

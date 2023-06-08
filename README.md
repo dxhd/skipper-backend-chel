@@ -38,4 +38,4 @@ To check endpoints, sipmly run the server with (use `mvnw` on Linux respectively
 ```
 .\mvnw.cmd spring-boot:run
 ```
-Then, open your favourite borwser and follow the next link `localhost:8090/v3/swagger-ui.html`
+Then, open your favourite borwser and follow the next link `localhost:8080/v3/swagger-ui.html`

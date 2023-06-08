@@ -17,12 +17,10 @@ public class TagEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category", referencedColumnName = "name")
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private CategoryEntity category;
 
 }

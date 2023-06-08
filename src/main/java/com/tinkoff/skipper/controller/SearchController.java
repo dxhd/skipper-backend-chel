@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path = "api/search", produces = "application/json")
 @RequiredArgsConstructor
-@CrossOrigin(origins={ "http://localhost:8090", "http://localhost:3000" })
+@CrossOrigin(origins={ "http://localhost:8080", "http://localhost:3000" })
 public class SearchController {
 
     private final SearchService searchService;

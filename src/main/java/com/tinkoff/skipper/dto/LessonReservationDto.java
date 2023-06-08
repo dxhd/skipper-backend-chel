@@ -11,11 +11,8 @@ import java.time.LocalDateTime;
 @Builder
 public class LessonReservationDto {
 
-    private final String lessonType;
-    private final Integer lessonLength;
-    private final BigDecimal lessonCost;
+    private final Long lessonTemplateId;
     private final LocalDateTime lessonDateTime;
-    private final String contactInfo;
     private final Long menteeId;
     private Long mentorId;
 

@@ -13,29 +13,37 @@ public class MentorProfileDto {
     private String username;
     private String userPicture;
     private String description;
-    private Integer studentNumber;
     private StatsDto stats;
-    private String reviews;
-    private String lessonTemplates;
-    private BigDecimal timeZone;
-    private String speciality;
-    private BigDecimal rating;
+    //    private Integer studentNumber;
+//    private String reviews;
+//    private String lessonTemplates;
+//    private BigDecimal timeZone;
+//    private BigDecimal rating;
     private LocalDate registrationDate;
+    private String speciality;
+    private String category;
+    private String[] tags;
     private Long id;
+    private BigDecimal rating;
 
-    public static MentorProfileDto toModel(UserEntity userEntity, MentorInfoEntity mentorInfoEntity, StatsDto stats)
+    public static MentorProfileDto toModel(UserEntity userEntity, MentorInfoEntity mentorInfoEntity, StatsDto stats, BigDecimal rating)
     {
         MentorProfileDto model = new MentorProfileDto();
         model.setUsername(mentorInfoEntity.getUser().getUsername());
         model.setDescription(mentorInfoEntity.getDescription());
-        model.setUserPicture(userEntity.getUserPicture());
-        //model.setStudentNumber(mentorInfoEntity.getStudentNumber());
+        model.setUserPicture(userEntity.getUserPictureURL());
+        model.setCategory(mentorInfoEntity.getCategory().getName());
+        model.setTags(mentorInfoEntity.getTags().stream().map(
+                (tag) -> tag.getName()
+        ).toList().toArray(String[] :: new));
         model.setStats(stats);
-        model.setTimeZone(userEntity.getTimeZone());
         model.setSpeciality(mentorInfoEntity.getSpeciality());
-        model.setRating(mentorInfoEntity.getRating());
         model.setRegistrationDate(userEntity.getCreatedAt());
+        model.setRating(rating);
         model.setId(userEntity.getId());
+//        model.setStudentNumber(mentorInfoEntity.getStudentNumber());
+//        model.setTimeZone(userEntity.getTimeZone());
+//        model.setRating(mentorInfoEntity.getRating());
 
         return model;
     }

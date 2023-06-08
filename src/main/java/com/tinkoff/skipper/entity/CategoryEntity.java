@@ -15,9 +15,7 @@ public class CategoryEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
     @JsonIgnore
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private Set<TagEntity> tags;
